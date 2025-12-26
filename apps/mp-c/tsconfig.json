@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "baseUrl": ".",
+    "rootDir": "../..",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@img/*": [
+        "./src/static/*"
+      ],
+      "@mock/*": [
+        "../mock-server/src/app/api/mock/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "types": [
+      "@dcloudio/types",
+      "@uni-helper/uni-types",
+      "@uni-helper/vite-plugin-uni-pages",
+      "miniprogram-api-typings",
+      "z-paging/types",
+      "./src/typings.d.ts",
+      "wot-design-uni/global.d.ts"
+    ],
+    "allowJs": true,
+    "noImplicitThis": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+  },
+  "vueCompilerOptions": {
+    "plugins": [
+      "@uni-helper/uni-types/volar-plugin"
+    ]
+  },
+  "include": [
+    "package.json",
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.jsx",
+    "src/**/*.vue",
+    "src/**/*.json",
+    "../mock-server/src/app/api/mock/**/model.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

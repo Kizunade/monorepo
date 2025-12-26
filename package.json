@@ -1,0 +1,23 @@
+{
+  "name": "monorepo",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint:fix": "bun run --filter '*' lint:fix",
+    "dev": "bun run --filter '*' dev",
+    "build": "bun run --filter '*' build",
+    "build:mp": "bun run --filter 'mp-c' build:mp",
+    "build:mock-server": "bun run --filter 'mock-server' build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

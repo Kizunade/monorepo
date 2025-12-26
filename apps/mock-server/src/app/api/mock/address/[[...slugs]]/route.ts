@@ -1,0 +1,75 @@
+import { openapi } from '@elysiajs/openapi'
+import { serverTiming } from '@elysiajs/server-timing'
+import { Elysia } from 'elysia'
+import { generateHandlers } from '@/lib/utils/generateHandlers'
+import { getPrefix } from '@/lib/utils/getPrefix'
+import { AddressModel, TOOL_NAME } from '../model'
+import { AddressService } from '../service'
+
+const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
+  .use(
+    openapi(),
+  )
+  .use(serverTiming())
+  .post(
+    '',
+    ({ body }) => {
+      return AddressService.add(body)
+    },
+    {
+      body: AddressModel.address,
+      response: AddressModel.ajaxResult,
+      detail: {
+        summary: '新增地址',
+        tags: ['用户地址'],
+        operationId: 'add',
+      },
+    },
+  )
+  .put(
+    '',
+    ({ body }) => {
+      return AddressService.update(body)
+    },
+    {
+      body: AddressModel.address,
+      response: AddressModel.ajaxResult,
+      detail: {
+        summary: '修改接口',
+        tags: ['用户地址'],
+        operationId: 'update',
+      },
+    },
+  )
+  .delete(
+    '/:addrId',
+    ({ params }) => {
+      return AddressService.remove(params.addrId)
+    },
+    {
+      params: AddressModel.removeParams,
+      response: AddressModel.ajaxResult,
+      detail: {
+        summary: '删除接口',
+        tags: ['用户地址'],
+        operationId: 'remove',
+      },
+    },
+  )
+  .get(
+    '/list',
+    ({ query }) => {
+      return AddressService.list(query as AddressModel.ListParams)
+    },
+    {
+      query: AddressModel.listParamsSchema,
+      response: AddressModel.pageResultAddress,
+      detail: {
+        summary: '查询接口',
+        tags: ['用户地址'],
+        operationId: 'list',
+      },
+    },
+  )
+
+export const { GET, POST, PUT, DELETE } = generateHandlers(app)
