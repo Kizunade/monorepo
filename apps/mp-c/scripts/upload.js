@@ -96,37 +96,20 @@ async function sendWebhook(status, errorMessage = '') {
 
   // 4. Upload
   try {
-    const uploadResult = await ci.upload({
+    // Generate Preview QR Code
+    console.log('Generating preview QR code...')
+    const previewResult = await ci.preview({
       project,
-      version,
       desc,
       setting: {
         es6: true,
         minify: true,
       },
+      qrcodeFormat: 'image',
+      qrcodeOutputDest: qrcodePath,
       onProgressUpdate: console.log,
     })
-    console.log('Upload success:', uploadResult)
-
-    // Generate Preview QR Code
-    console.log('Generating preview QR code...')
-    try {
-      const previewResult = await ci.preview({
-        project,
-        desc,
-        setting: {
-          es6: true,
-          minify: true,
-        },
-        qrcodeFormat: 'image',
-        qrcodeOutputDest: qrcodePath,
-        onProgressUpdate: console.log,
-      })
-      console.log('Preview success:', previewResult)
-    }
-    catch (e) {
-      console.warn('Preview generation failed, but upload succeeded:', e)
-    }
+    console.log('Preview success:', previewResult)
 
     await sendWebhook('success')
   }
