@@ -41,6 +41,19 @@ function handleSettings() {
   uni.navigateTo({ url: '/pages/settings/index' })
 }
 
+function handleProfile() {
+  uni.navigateTo({ url: '/pages/settings/profile' })
+}
+
+function handleUserInfoClick() {
+  if (!tokenStore.hasLogin) {
+    handleLogin()
+  }
+  else {
+    handleProfile()
+  }
+}
+
 const avatarPlaceholder = 'https://github.com/shadcn.png'
 
 const displayName = computed(() => {
@@ -86,21 +99,21 @@ function toastAdd() {
     <BackgroundGlow />
     <WdNavbar custom-style="background-color: transparent;" safe-area-inset-top :bordered="false" />
 
-    <view class="flex items-center justify-between">
-      <view class="flex items-center gap-3">
-        <image :src="avatarPlaceholder" class="h-48rpx w-48rpx rounded-full bg-white/60" mode="aspectFill" />
-        <view v-if="!tokenStore.hasLogin" class="text-lg text-gray-800 font-semibold" @click="handleLogin">
+    <view class="mt-2 flex items-center justify-between">
+      <view class="flex items-center gap-3" @click="handleUserInfoClick">
+        <image :src="userInfo.avatar || avatarPlaceholder" class="h-90rpx w-90rpx rounded-full bg-white/60" mode="aspectFill" />
+        <view v-if="!tokenStore.hasLogin" class="text-wot-title text-lg font-semibold">
           点击登录
         </view>
-        <view v-else class="text-lg text-gray-800 font-semibold">
+        <view v-else class="text-wot-title text-lg font-semibold">
           {{ displayName || '欢迎回来' }}
         </view>
       </view>
-      <view class="i-carbon-settings text-28rpx text-gray-700" @click="handleSettings" />
+      <view class="i-carbon-settings text-wot-content text-28rpx" @click="handleSettings" />
     </view>
 
     <view class="mt-6">
-      <view class="mb-3 px-1 text-base text-gray-700 font-semibold">
+      <view class="text-wot-title mb-3 px-1 text-base font-semibold">
         我的宠物
       </view>
       <view class="grid grid-cols-2 gap-3">
@@ -111,17 +124,17 @@ function toastAdd() {
         >
           <view class="flex flex-col items-center">
             <image :src="pet.avatar" class="h-120rpx w-120rpx rounded-full" mode="aspectFill" />
-            <view class="mt-2 text-sm text-gray-700 font-medium">
+            <view class="text-wot-title mt-2 text-sm font-medium">
               {{ pet.name }}
             </view>
           </view>
         </view>
         <view
-          class="flex flex-col items-center justify-center border border-gray-300 rounded-2xl border-dashed bg-white/70 p-3 shadow"
+          class="border-border-dark flex flex-col items-center justify-center border rounded-2xl border-dashed bg-white/70 p-3 shadow"
           @click="toastAdd"
         >
-          <view class="i-carbon-add text-40rpx text-gray-500" />
-          <view class="mt-1 text-sm text-gray-600">
+          <view class="i-carbon-add text-wot-secondary text-40rpx" />
+          <view class="text-wot-secondary mt-1 text-sm">
             添加
           </view>
         </view>
@@ -129,7 +142,7 @@ function toastAdd() {
     </view>
 
     <view class="mt-6">
-      <view class="mb-3 px-1 text-base text-gray-700 font-semibold">
+      <view class="text-wot-title mb-3 px-1 text-base font-semibold">
         更多服务
       </view>
       <view>
@@ -139,20 +152,20 @@ function toastAdd() {
           class="mb-2 flex items-center justify-between rounded-2xl bg-white/90 p-4 shadow-md"
           @click="handleAction(act.key)"
         >
-          <view class="text-gray-800">
+          <view class="text-wot-title">
             {{ act.label }}
           </view>
-          <view class="i-carbon-chevron-right text-28rpx text-gray-500" />
+          <view class="i-carbon-chevron-right text-wot-secondary text-28rpx" />
         </view>
         <view
           v-if="tokenStore.hasLogin"
           class="mt-2 flex items-center justify-between rounded-2xl bg-white/90 p-4 shadow-md"
           @click="handleLogout"
         >
-          <view class="text-red-600">
+          <view class="text-wot-danger">
             退出登录
           </view>
-          <view class="i-carbon-exit text-28rpx text-red-500" />
+          <view class="i-carbon-exit text-wot-danger text-28rpx" />
         </view>
       </view>
     </view>

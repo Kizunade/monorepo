@@ -1,22 +1,42 @@
 import type { MpModel } from '@mock/mp/model'
 import { http } from '@/http/alova'
+import { useTokenStore } from '@/store'
+import { getEnvBaseUrl } from '@/utils'
 
 /**
  * 用户信息
  */
-export interface IUserInfoRes {
-  userId: number
-  username: string
-  nickname: string
-  avatar?: string
-  [key: string]: any // 允许其他扩展字段
-}
+export type IUserInfoRes = MpModel.UserInfo
 
 /**
  * 获取用户信息
  */
 export function getUserInfo() {
-  return http.Get<IUserInfoRes>('/user/info')
+  return http.Get<MpModel.GetUserInfoResponse>('/mp/userInfo')
+}
+
+/**
+ * 更新用户信息
+ */
+export function updateUserInfo(data: MpModel.UpdateUserInfoParams) {
+  return http.Post<MpModel.UpdateUserInfoResponse>('/mp/userInfo', data)
+}
+
+/**
+ * 上传头像
+ */
+export function uploadAvatar(filePath: string) {
+  const tokenStore = useTokenStore()
+  return uni.uploadFile({
+    url: `${getEnvBaseUrl()}/mp/upload/avatar`,
+    filePath,
+    name: 'file',
+    header: {
+      Authorization: `Bearer ${tokenStore.tokenInfo.token}`,
+      // 如果需要token，需在此添加。alova拦截器处理的是http请求，uni.uploadFile需手动处理或封装
+      // 假设token在store中，但在api层直接获取store可能引起循环依赖，通常建议在调用处或封装uploadFile
+    },
+  })
 }
 
 /**

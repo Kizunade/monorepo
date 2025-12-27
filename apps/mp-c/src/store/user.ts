@@ -11,6 +11,9 @@ const userInfoState: IUserInfoRes = {
   username: '',
   nickname: '',
   avatar: '/static/images/default-avatar.png',
+  phone: '',
+  gender: '保密',
+  birthday: '',
 }
 
 export const useUserStore = defineStore(
@@ -43,8 +46,11 @@ export const useUserStore = defineStore(
      */
     const fetchUserInfo = async () => {
       const res = await getUserInfo()
-      setUserInfo(res)
-      return res
+      if (res.code === 200 && res.data) {
+        setUserInfo(res.data)
+        return res.data
+      }
+      return null
     }
 
     return {

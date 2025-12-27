@@ -130,7 +130,7 @@ const alovaInstance = createAlova({
       throw new Error(`请求错误[${code}]：${message}`)
     }
     // 处理成功响应，返回业务数据
-    return data
+    return rawData
   }),
 })
 

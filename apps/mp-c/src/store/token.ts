@@ -67,9 +67,9 @@ export const useTokenStore = defineStore(
      */
     async function _postLogin(tokenInfo: MpModel.LoginResponse) {
       setTokenInfo(tokenInfo)
-      // TODO: 实现登录成功后获取用户信息的接口和逻辑
-      // const userStore = useUserStore()
-      // await userStore.fetchUserInfo()
+      // 获取用户信息
+      const userStore = useUserStore()
+      await userStore.fetchUserInfo()
     }
 
     /**

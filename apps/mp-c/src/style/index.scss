@@ -55,4 +55,14 @@ page {
   // --- 兼容性映射 ---
   // 映射到 Wot Design Uni 变量
   --wot-color-theme: var(--color-primary);
+  --wot-color-title: var(--text-primary);
+  --wot-color-content: var(--text-secondary);
+  --wot-color-secondary: var(--color-text-primary); // 暂定映射为主色，如需区分可单独定义
+  --wot-color-warning: var(--color-warning);
+  --wot-color-success: var(--color-success);
+  --wot-color-danger: var(--color-error);
+  --wot-color-info: var(--color-info);
+  --wot-color-disabled: var(--text-disabled);
+  --wot-color-border: var(--border-color);
+  --wot-bg-color: var(--bg-page);
 }

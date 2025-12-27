@@ -16,4 +16,45 @@ export abstract class MpService {
       token: 'asdfw123kj',
     }
   }
+
+  // 模拟内存数据库
+  private static mockUser: MpModel.UserInfo = {
+    userId: 12345,
+    username: 'user_12345',
+    nickname: '微信用户',
+    avatar: 'https://github.com/shadcn.png',
+    phone: '13800138000',
+    gender: '保密',
+    birthday: '2000-01-01',
+  }
+
+  static async getUserInfo(): Promise<MpModel.GetUserInfoResponse> {
+    return {
+      code: 200,
+      msg: 'success',
+      data: this.mockUser,
+    }
+  }
+
+  static async updateUserInfo(args: MpModel.UpdateUserInfoParams): Promise<MpModel.UpdateUserInfoResponse> {
+    this.mockUser = {
+      ...this.mockUser,
+      ...args,
+    }
+    return {
+      code: 200,
+      msg: '更新成功',
+      data: this.mockUser,
+    }
+  }
+
+  static async uploadFile(file: File): Promise<MpModel.UploadFileResponse> {
+    // 模拟文件上传，实际应保存文件并返回URL
+    console.log('Upload file:', file.name, file.size)
+    return {
+      code: 200,
+      msg: '上传成功',
+      url: 'https://github.com/shadcn.png', // 模拟返回固定图片
+    }
+  }
 }

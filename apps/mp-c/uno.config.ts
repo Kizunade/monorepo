@@ -86,33 +86,49 @@ export default defineConfig({
   theme: {
     colors: {
       /** 主题色 */
-      primary: 'var(--color-primary)',
+      'primary': 'var(--color-primary)',
 
       /** 功能色 */
-      success: 'var(--color-success)',
-      warning: 'var(--color-warning)',
-      error: 'var(--color-error)',
-      info: 'var(--color-info)',
+      'success': 'var(--color-success)',
+      'warning': 'var(--color-warning)',
+      'error': 'var(--color-error)',
+      'info': 'var(--color-info)',
 
       /** 文本颜色 */
-      main: 'var(--text-primary)',
-      content: 'var(--text-secondary)',
-      tips: 'var(--text-tertiary)',
-      placeholder: 'var(--text-placeholder)',
-      inverse: 'var(--text-inverse)',
+      'main': 'var(--text-primary)',
+      'content': 'var(--text-secondary)',
+      'tips': 'var(--text-tertiary)',
+      'placeholder': 'var(--text-placeholder)',
+      'inverse': 'var(--text-inverse)',
 
       /** 背景颜色 */
-      page: 'var(--bg-page)',
-      card: 'var(--bg-card)',
-      hover: 'var(--bg-hover)',
+      'page': 'var(--bg-page)',
+      'card': 'var(--bg-card)',
+      'hover': 'var(--bg-hover)',
 
       /** 边框颜色 */
-      border: 'var(--border-color)',
+      'border': 'var(--border-color)',
+      'border-dark': 'var(--border-color-dark)',
 
       // 兼容原有命名 (optional)
-      gray: {
+      'gray': {
         100: 'var(--bg-page)', // usually mapped to light gray
         400: 'var(--text-tertiary)',
+      },
+
+      /** Wot Design Uni Colors */
+      'wot': {
+        primary: 'var(--wot-color-theme)',
+        title: 'var(--wot-color-title)',
+        content: 'var(--wot-color-content)',
+        secondary: 'var(--wot-color-secondary)',
+        warning: 'var(--wot-color-warning)',
+        success: 'var(--wot-color-success)',
+        danger: 'var(--wot-color-danger)',
+        info: 'var(--wot-color-info)',
+        disabled: 'var(--wot-color-disabled)',
+        border: 'var(--wot-color-border)',
+        bg: 'var(--wot-bg-color)',
       },
     },
     fontSize: {

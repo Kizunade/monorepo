@@ -1,6 +1,7 @@
 import { openapi } from '@elysiajs/openapi'
 import { serverTiming } from '@elysiajs/server-timing'
 import { Elysia } from 'elysia'
+import z from 'zod'
 import { getPrefix } from '@/lib/utils/getPrefix'
 import { MpModel, TOOL_NAME } from '../model'
 import { MpService } from '../service'
@@ -22,6 +23,53 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
         summary: '微信小程序登录',
         tags: ['用户登录'],
         operationId: 'login',
+      },
+    },
+  )
+  .get(
+    '/userInfo',
+    () => {
+      return MpService.getUserInfo()
+    },
+    {
+      response: MpModel.getUserInfoResponse,
+      detail: {
+        summary: '获取用户信息',
+        tags: ['用户管理'],
+        operationId: 'getUserInfo',
+      },
+    },
+  )
+  .post(
+    '/userInfo',
+    ({ body }) => {
+      return MpService.updateUserInfo(body as MpModel.UpdateUserInfoParams)
+    },
+    {
+      body: MpModel.updateUserInfoParams,
+      response: MpModel.updateUserInfoResponse,
+      detail: {
+        summary: '更新用户信息',
+        tags: ['用户管理'],
+        operationId: 'updateUserInfo',
+      },
+    },
+  )
+  .post(
+    '/upload/avatar',
+    ({ body }) => {
+      const file = body.file as File
+      return MpService.uploadFile(file)
+    },
+    {
+      body: z.object({
+        file: z.instanceof(File),
+      }),
+      response: MpModel.uploadFileResponse,
+      detail: {
+        summary: '上传头像',
+        tags: ['文件上传'],
+        operationId: 'uploadAvatar',
       },
     },
   )
