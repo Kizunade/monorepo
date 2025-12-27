@@ -1,12 +1,10 @@
 ---
-filters:
-  - apps/mock-server/**
 alwaysApply: false
-description: 编写 mock 接口时生效
+globs: apps/mock-server/**
 ---
 # Mock Interface Generation Rules
 
-当用户提供 OpenAPI JSON 定义并请求生成 Mock 接口时，请遵循以下规范和模式。
+当用户请求生成 Mock 接口时，请遵循以下规范和模式。
 
 ## 1. 目录结构
 
