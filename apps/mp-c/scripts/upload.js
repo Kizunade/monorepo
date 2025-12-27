@@ -21,8 +21,7 @@ const qrcodePath = path.resolve(__dirname, '../preview.jpg')
 
 // Helper to send webhook
 async function sendWebhook(status, errorMessage = '') {
-  // const baseUrl = 'https://pet.koiism.cn'
-  const baseUrl = 'http://localhost:3000'
+  const baseUrl = 'https://pet.koiism.cn'
   const webhookUrl = `${baseUrl}/api/lark/bot-ci-cd/on-mp-uploaded`
 
   console.log(`Sending webhook to ${webhookUrl}...`)
