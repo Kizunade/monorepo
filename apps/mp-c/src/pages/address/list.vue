@@ -55,7 +55,7 @@ onShow(() => {
 </script>
 
 <template>
-  <view class="min-h-screen bg-gray-100">
+  <view class="min-h-screen bg-page">
     <!-- 骨架屏 -->
     <AddressSkeleton v-if="loading && list.length === 0" />
 
@@ -74,7 +74,7 @@ onShow(() => {
       />
 
       <!-- 加载状态 -->
-      <view v-if="list.length > 0" class="py-4 text-center text-sm text-gray-400">
+      <view v-if="list.length > 0" class="py-4 text-center text-sm text-tips">
         <text v-if="loading">
           加载中...
         </text>
@@ -85,7 +85,7 @@ onShow(() => {
     </view>
 
     <!-- 底部按钮 -->
-    <view class="shadow-t fixed bottom-0 left-0 right-0 bg-white p-4 pb-safe">
+    <view class="shadow-t fixed bottom-0 left-0 right-0 bg-card p-4 pb-safe">
       <WdButton block type="primary" @click="handleAdd">
         新增地址
       </WdButton>
@@ -95,6 +95,6 @@ onShow(() => {
 
 <style scoped>
 .shadow-t {
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -2px 10px var(--shadow-sm);
 }
 </style>

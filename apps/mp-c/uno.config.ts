@@ -85,8 +85,35 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      /** 主题色，用法如: text-primary */
-      primary: 'var(--wot-color-theme,#0957DE)',
+      /** 主题色 */
+      primary: 'var(--color-primary)',
+
+      /** 功能色 */
+      success: 'var(--color-success)',
+      warning: 'var(--color-warning)',
+      error: 'var(--color-error)',
+      info: 'var(--color-info)',
+
+      /** 文本颜色 */
+      main: 'var(--text-primary)',
+      content: 'var(--text-secondary)',
+      tips: 'var(--text-tertiary)',
+      placeholder: 'var(--text-placeholder)',
+      inverse: 'var(--text-inverse)',
+
+      /** 背景颜色 */
+      page: 'var(--bg-page)',
+      card: 'var(--bg-card)',
+      hover: 'var(--bg-hover)',
+
+      /** 边框颜色 */
+      border: 'var(--border-color)',
+
+      // 兼容原有命名 (optional)
+      gray: {
+        100: 'var(--bg-page)', // usually mapped to light gray
+        400: 'var(--text-tertiary)',
+      },
     },
     fontSize: {
       /** 提供更小号的字体，用法如：text-2xs */

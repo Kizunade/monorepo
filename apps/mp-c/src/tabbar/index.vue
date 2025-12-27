@@ -67,8 +67,8 @@ onMounted(() => {
     })
   }
 })
-const activeColor = 'var(--wot-color-theme, #1890ff)'
-const inactiveColor = '#666'
+const activeColor = 'var(--color-primary)'
+const inactiveColor = 'var(--text-secondary)'
 function getColorByIndex(index: number) {
   return tabbarStore.curIdx === index ? activeColor : inactiveColor
 }
@@ -85,7 +85,7 @@ function getImageByIndex(index: number, item: CustomTabBarItem) {
 <template>
   <view v-if="customTabbarEnable" class="h-50px pb-safe">
     <view
-      class="border-and-fixed bg-white"
+      class="border-and-fixed bg-card"
       @touchmove.stop.prevent
     >
       <view class="h-50px flex items-center">
@@ -133,12 +133,12 @@ function getImageByIndex(index: number, item: CustomTabBarItem) {
             <view v-if="item.badge">
               <template v-if="item.badge === 'dot'">
                 <view
-                  class="absolute right-0 top-0 h-2 w-2 rounded-full bg-#f56c6c"
+                  class="absolute right-0 top-0 h-2 w-2 rounded-full bg-error"
                 />
               </template>
               <template v-else>
                 <view
-                  class="absolute top-0 box-border h-5 min-w-5 center rounded-full bg-#f56c6c px-1 text-center text-xs text-white -right-3"
+                  class="absolute top-0 box-border h-5 min-w-5 center rounded-full bg-error px-1 text-center text-xs text-inverse -right-3"
                 >
                   {{ item.badge > 99 ? '99+' : item.badge }}
                 </view>
@@ -163,7 +163,7 @@ function getImageByIndex(index: number, item: CustomTabBarItem) {
   right: 0;
   z-index: 1000;
 
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color);
   box-sizing: border-box;
 }
 
@@ -180,8 +180,8 @@ function getImageByIndex(index: number, item: CustomTabBarItem) {
   width: 250rpx;
   height: 250rpx;
   border-radius: 50%;
-  background-color: #fff;
-  box-shadow: inset 0 0 0 1px #fefefe;
+  background-color: var(--bg-card);
+  box-shadow: inset 0 0 0 1px var(--border-light);
 
   &:active {
     // opacity: 0.8;

@@ -13,14 +13,14 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px circle at 10% 10%, rgba(255, 138, 76, 0.45), transparent 60%),
-    radial-gradient(700px circle at 80% 20%, rgba(255, 99, 132, 0.45), transparent 60%),
-    radial-gradient(900px circle at 20% 80%, rgba(255, 205, 86, 0.45), transparent 60%),
-    radial-gradient(600px circle at 90% 70%, rgba(255, 159, 64, 0.45), transparent 60%);
+    radial-gradient(900px circle at 10% 10%, var(--glow-color-1), transparent 60%),
+    radial-gradient(700px circle at 80% 20%, var(--glow-color-2), transparent 60%),
+    radial-gradient(900px circle at 20% 80%, var(--glow-color-3), transparent 60%),
+    radial-gradient(600px circle at 90% 70%, var(--glow-color-4), transparent 60%);
   filter: blur(60px);
   transform: translateZ(0);
 }
 .overlay {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8));
+  background: linear-gradient(180deg, var(--overlay-start), var(--overlay-end));
 }
 </style>

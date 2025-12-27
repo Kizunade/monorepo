@@ -82,7 +82,7 @@ onUnload(() => {
     <view class="mt-4 flex justify-center">
       <!-- 手动控制 tooltip 显示 -->
       <WdTooltip :show="showTooltip" content="点击勾选方可进行注册/登录" placement="top">
-        <WdCheckbox v-model="isAgreed" shape="circle" checked-color="#0083ff">
+        <WdCheckbox v-model="isAgreed" shape="circle" checked-color="var(--color-primary)">
           我已认真阅读并同意{{ appName }}《服务条款》
         </WdCheckbox>
       </WdTooltip>
@@ -97,6 +97,6 @@ onUnload(() => {
 }
 .login-container {
   min-height: 100vh;
-  background-color: #fff;
+  background-color: var(--bg-card);
 }
 </style>

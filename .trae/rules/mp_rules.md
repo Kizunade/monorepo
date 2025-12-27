@@ -4,7 +4,18 @@ globs: apps/mp-c/**
 ---
 # 项目概览
 
-这是一个基于 uniapp + Vue3 + TypeScript + Vite5 + UnoCSS 的跨平台开发框架。
+本项目主要服务宠物主，包括上门洗护、上门喂猫、遛狗等服务。
+
+## UI 样式风格
+- **主色调**：活力橙 (#ff7a00)，传达温暖、活泼、亲和的品牌形象。
+- **设计语言**：
+  - **圆润亲和**：卡片和按钮使用较大的圆角（如 `rounded-lg`），避免尖锐的直角。
+  - **简洁现代**：大量使用留白（Whitespace），清晰的信息层级，避免视觉杂乱。
+  - **层次分明**：使用浅灰色背景（如 `#f7f8fa`）衬托白色卡片内容。
+- **色彩规范**：
+  - Primary: `#ff7a00` (通过 `text-primary`, `bg-primary` 使用)
+  - Text: 主要文字 `#333`，次要文字 `#666`，辅助文字 `#999`。
+  - Background: 页面背景 `#f7f8fa`，内容背景 `#ffffff`。
 
 ## 核心配置文件
 - [package.json](mdc:package.json) - 项目依赖和脚本配置
@@ -43,9 +54,14 @@ globs: apps/mp-c/**
 - 支持持久化存储
 
 ## UnoCSS 原子化 CSS
-- 项目使用 UnoCSS 作为原子化 CSS 框架
-- 配置在 [uno.config.ts]
-- 支持预设和自定义规则
+- **核心配置**：配置在 [uno.config.ts](mdc:uno.config.ts)，集成了 `preset-uni`。
+- **主题色使用**：
+  - 使用 `text-primary`, `bg-primary`, `border-primary` 等工具类，它们会自动映射到 `--wot-color-theme` (#ff7a00)。
+- **常用工具类推荐**：
+  - 布局：`flex`, `grid`, `justify-between`, `items-center`
+  - 间距：`m-4`, `p-4`, `gap-2` (基于 rpx 转换)
+  - 文本：`text-sm`, `text-gray-500`, `font-bold`
+  - 交互：`active:opacity-80` (点击反馈)
 - 优先使用原子化类名，减少自定义 CSS
 
 ## Vue SFC 组件规范
@@ -59,6 +75,7 @@ globs: apps/mp-c/**
 - 页面配置在仅需要在 宏`definePage` 中配置标题等内容即可，会自动生成到 `pages.json` 中
 
 ## 组件开发
+- **首选组件库**：**Wot Design Uni** (wot-ui)。项目已配置相关 CSS 变量，优先使用其提供的组件以保持风格一致。
 - 全局组件文件放在 `src/components/` 目录下
 - 局部组件文件放在页面的 `/components/` 目录下
 - 使用 uni-app 内置组件和第三方组件库
