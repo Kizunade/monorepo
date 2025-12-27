@@ -10,7 +10,7 @@ const TEMPLATE_IDS = {
 }
 
 // Hardcoded Receive ID (Placeholder)
-const RECEIVE_ID = 'ou_777d6116a7f7526fe915275ff0bbcd36'
+const RECEIVE_ID = 'oc_b5305b177c63343af1ff3b6e4900cde6'
 
 export abstract class BotCiCdService {
   private static getClient() {
