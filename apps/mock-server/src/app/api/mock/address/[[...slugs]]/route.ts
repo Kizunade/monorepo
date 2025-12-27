@@ -1,7 +1,6 @@
 import { openapi } from '@elysiajs/openapi'
 import { serverTiming } from '@elysiajs/server-timing'
 import { Elysia } from 'elysia'
-import { generateHandlers } from '@/lib/utils/generateHandlers'
 import { getPrefix } from '@/lib/utils/getPrefix'
 import { AddressModel, TOOL_NAME } from '../model'
 import { AddressService } from '../service'
@@ -72,4 +71,7 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
     },
   )
 
-export const { GET, POST, PUT, DELETE } = generateHandlers(app)
+export const GET = app.fetch
+export const POST = app.fetch
+export const PUT = app.fetch
+export const DELETE = app.fetch

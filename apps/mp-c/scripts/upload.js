@@ -17,8 +17,51 @@ const privateKeyPath = path.resolve(__dirname, `../private.${APP_ID}.key`)
 const version = packageJson.version || '1.0.0'
 // Use commit message or default description
 const desc = process.env.CI_COMMIT_MESSAGE || `CI Upload at ${new Date().toLocaleString()}`
+const qrcodePath = path.resolve(__dirname, '../preview.jpg')
 
-  ; (async () => {
+// Helper to send webhook
+async function sendWebhook(status, errorMessage = '') {
+  // const baseUrl = 'https://pet.koiism.cn'
+  const baseUrl = 'http://localhost:3000'
+  const webhookUrl = `${baseUrl}/api/lark/bot-ci-cd/on-mp-uploaded`
+
+  console.log(`Sending webhook to ${webhookUrl}...`)
+
+  try {
+    const formData = new FormData()
+    formData.append('status', status)
+    formData.append('commit-message', desc)
+    formData.append('mission', '小程序构建发布')
+
+    if (errorMessage) {
+      formData.append('error-message', errorMessage)
+    }
+
+    if (status === 'success' && fs.existsSync(qrcodePath)) {
+      const fileBuffer = fs.readFileSync(qrcodePath)
+      const blob = new Blob([fileBuffer])
+      formData.append('qrcode', blob, 'preview.jpg')
+    }
+
+    if (process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID) {
+      const logUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+      formData.append('log-url', logUrl)
+    }
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      body: formData,
+    })
+
+    const result = await response.json()
+    console.log('Webhook response:', result)
+  }
+  catch (error) {
+    console.error('Failed to send webhook:', error)
+  }
+}
+
+; (async () => {
   console.log(`Starting upload for ${APP_ID}...`)
   console.log(`Project Path: ${projectPath}`)
   console.log(`Version: ${version}`)
@@ -65,9 +108,32 @@ const desc = process.env.CI_COMMIT_MESSAGE || `CI Upload at ${new Date().toLocal
       onProgressUpdate: console.log,
     })
     console.log('Upload success:', uploadResult)
+
+    // Generate Preview QR Code
+    console.log('Generating preview QR code...')
+    try {
+      const previewResult = await ci.preview({
+        project,
+        desc,
+        setting: {
+          es6: true,
+          minify: true,
+        },
+        qrcodeFormat: 'image',
+        qrcodeOutputDest: qrcodePath,
+        onProgressUpdate: console.log,
+      })
+      console.log('Preview success:', previewResult)
+    }
+    catch (e) {
+      console.warn('Preview generation failed, but upload succeeded:', e)
+    }
+
+    await sendWebhook('success')
   }
   catch (error) {
     console.error('Upload failed:', error)
+    await sendWebhook('failed', error.message || String(error))
     process.exit(1)
   }
 })()

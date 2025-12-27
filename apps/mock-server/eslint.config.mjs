@@ -13,6 +13,7 @@ export default uniHelper({
   ],
   // https://eslint-config.antfu.me/rules
   rules: {
+    'node/prefer-global/process': 'off',
     'no-useless-return': 'off',
     'ts/no-namespace': 'off',
     'no-console': 'off',
