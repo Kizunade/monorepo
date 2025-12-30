@@ -1,11 +1,12 @@
 import type { uniappRequestAdapter } from '@alova/adapter-uniapp'
 import type { IResponse } from './types'
 import AdapterUniapp from '@alova/adapter-uniapp'
+import { isMpWeixin } from '@uni-helper/uni-env'
 import { createAlova } from 'alova'
 import { createServerTokenAuthentication } from 'alova/client'
 import VueHook from 'alova/vue'
 import { toLoginPage } from '@/utils/toLoginPage'
-import { mockList } from './constant'
+import { mockList } from './mockList'
 import { ContentTypeEnum, ResultEnum, ShowMessage } from './tools/enum'
 
 // 配置动态Tag
@@ -75,13 +76,18 @@ const alovaInstance = createAlova({
       // method.config.headers.token = token;
     }
 
-    // 微信小程序端环境区分
-    const {
-      miniProgram: { envVersion },
-    } = uni.getAccountInfoSync()
+    let isDevMode = import.meta.env.MODE === 'development'
+
+    if (isMpWeixin) {
+      // 微信小程序端环境区分
+      const {
+        miniProgram: { envVersion },
+      } = uni.getAccountInfoSync()
+      isDevMode = envVersion === 'develop'
+    }
 
     // 处理mock列表
-    if (mockList.includes(url) && envVersion === 'develop') {
+    if (mockList.includes(url) && isDevMode) {
       method.baseURL = API_DOMAINS.DEV
     }
 

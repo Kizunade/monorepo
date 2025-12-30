@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import WdButton from 'wot-design-uni/components/wd-button/wd-button.vue'
 import WdStatusTip from 'wot-design-uni/components/wd-status-tip/wd-status-tip.vue'
 
+import { PAGES } from '@/router/config'
 import { useAddressStore } from '@/store'
 import AddressCard from './components/AddressCard.vue'
 import AddressSkeleton from './components/AddressSkeleton.vue'
@@ -20,13 +21,13 @@ const addressStore = useAddressStore()
 const { addressList: list, loading, finished } = storeToRefs(addressStore)
 
 function handleAdd() {
-  uni.navigateTo({ url: '/pages/address/edit' })
+  uni.navigateTo({ url: PAGES.ADDRESS_EDIT })
 }
 
 function handleEdit(item: AddressModel.Address) {
   // 传递地址信息到编辑页
   const addressStr = encodeURIComponent(JSON.stringify(item))
-  uni.navigateTo({ url: `/pages/address/edit?data=${addressStr}` })
+  uni.navigateTo({ url: `${PAGES.ADDRESS_EDIT}?data=${addressStr}` })
 }
 
 // 下拉刷新

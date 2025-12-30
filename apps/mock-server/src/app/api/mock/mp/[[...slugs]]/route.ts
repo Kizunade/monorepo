@@ -1,7 +1,6 @@
 import { openapi } from '@elysiajs/openapi'
 import { serverTiming } from '@elysiajs/server-timing'
 import { Elysia } from 'elysia'
-import z from 'zod'
 import { getPrefix } from '@/lib/utils/getPrefix'
 import { MpModel, TOOL_NAME } from '../model'
 import { MpService } from '../service'
@@ -56,20 +55,48 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
     },
   )
   .post(
-    '/upload/avatar',
+    '/upload/file',
     ({ body }) => {
-      const file = body.file as File
+      const { file } = body as unknown as MpModel.UploadFileParams
       return MpService.uploadFile(file)
     },
     {
-      body: z.object({
-        file: z.instanceof(File),
-      }),
+      body: MpModel.uploadFileParams,
+      response: MpModel.uploadFileResponse,
+      detail: {
+        summary: '上传文件',
+        tags: ['文件上传'],
+        operationId: 'uploadFile',
+      },
+    },
+  )
+  .post(
+    '/upload/avatar',
+    ({ body }) => {
+      const { file } = body as unknown as MpModel.UploadFileParams
+      return MpService.uploadFile(file)
+    },
+    {
+      body: MpModel.uploadFileParams,
       response: MpModel.uploadFileResponse,
       detail: {
         summary: '上传头像',
         tags: ['文件上传'],
         operationId: 'uploadAvatar',
+      },
+    },
+  )
+  .get(
+    '/globalConfig',
+    () => {
+      return MpService.getGlobalConfig()
+    },
+    {
+      response: MpModel.globalConfigResponse,
+      detail: {
+        summary: '获取全局配置',
+        tags: ['基础配置'],
+        operationId: 'getGlobalConfig',
       },
     },
   )
