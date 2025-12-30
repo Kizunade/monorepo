@@ -183,6 +183,8 @@ export const useTokenStore = defineStore(
     const ensureUserLogin = async () => {
       updateNowTime()
       if (hasValidLogin.value) {
+        const userStore = useUserStore()
+        await userStore.ensureUserInfo()
         return
       }
 

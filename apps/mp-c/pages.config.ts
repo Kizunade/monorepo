@@ -1,7 +1,17 @@
 import { defineUniPages } from '@uni-helper/vite-plugin-uni-pages'
+import { getCurrentPageIndex, PAGE_NAMES, PAGES } from './src/router/pages'
 import { tabBar } from './src/tabbar/config'
 
+const pageList = Object.entries(PAGES).map(item => ({
+  name: PAGE_NAMES[item[0]],
+  path: item[1],
+}))
+
 export default defineUniPages({
+  condition: {
+    current: getCurrentPageIndex('ME'),
+    list: pageList,
+  },
   globalStyle: {
     navigationStyle: 'default',
     navigationBarTitleText: 'unibest',

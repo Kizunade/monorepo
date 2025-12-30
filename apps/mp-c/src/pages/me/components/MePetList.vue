@@ -39,8 +39,7 @@ function toastAdd() {
         <view
           v-for="(pet, index) in pets"
           :key="pet.id"
-          class="relative box-border h-320rpx w-240rpx flex flex-shrink-0 flex-col items-center justify-center rounded-[32rpx] bg-white p-4 shadow-[0_8px_24px_rgba(0,0,0,0.04)] transition-all active:scale-95"
-          :style="{ transform: `rotate(${index % 2 === 0 ? '-1deg' : '1deg'})` }"
+          :class="`relative box-border h-320rpx w-240rpx flex shrink-0 flex-col items-center justify-center rounded-[32rpx] bg-white p-4 shadow-[0_8px_24px_rgba(0,0,0,0.04)] transition-all active:scale-95 ${index % 2 === 0 ? '-rotate-1deg' : 'rotate-1deg'}`"
         >
           <view class="relative mb-3">
             <image :src="pet.avatar" class="h-140rpx w-140rpx rounded-[28rpx] bg-gray-50" mode="aspectFill" />
@@ -48,7 +47,7 @@ function toastAdd() {
               class="absolute box-border h-8 w-8 flex items-center justify-center border-2 border-white rounded-full shadow-sm -bottom-2 -right-2"
               :class="pet.gender === 'male' ? 'bg-blue-100 text-blue-500' : 'bg-pink-100 text-pink-500'"
             >
-              <view :class="pet.gender === 'male' ? 'i-carbon-mars' : 'i-carbon-female'" class="text-sm font-bold" />
+              <view :class="pet.gender === 'male' ? 'i-carbon-gender-male' : 'i-carbon-gender-female'" class="text-sm font-bold" />
             </view>
           </view>
           <view class="mb-1 text-base text-[#333] font-bold">

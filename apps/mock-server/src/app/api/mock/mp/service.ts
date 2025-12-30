@@ -21,8 +21,8 @@ export abstract class MpService {
   private static mockUser: MpModel.UserInfo = {
     userId: 12345,
     username: 'user_12345',
-    nickname: '微信用户',
-    avatar: 'https://github.com/shadcn.png',
+    nickname: '皮蛋萌',
+    avatar: 'https://pub-a755381d2970462a828e2d91e8fedfe5.r2.dev/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_2025-12-12_103937_807.jpg',
     phone: '13800138000',
     gender: '保密',
     birthday: '2000-01-01',

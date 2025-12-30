@@ -53,12 +53,21 @@ export const useUserStore = defineStore(
       return null
     }
 
+    const ensureUserInfo = async () => {
+      const info = userInfo.value
+      if (info.userId <= 0) {
+        await fetchUserInfo()
+      }
+      return userInfo.value
+    }
+
     return {
       userInfo,
       clearUserInfo,
       fetchUserInfo,
       setUserInfo,
       setUserAvatar,
+      ensureUserInfo,
     }
   },
   {

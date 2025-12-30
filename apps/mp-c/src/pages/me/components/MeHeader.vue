@@ -11,8 +11,6 @@ const userStore = useUserStore()
 const tokenStore = useTokenStore()
 const { userInfo } = storeToRefs(userStore)
 
-const avatarPlaceholder = 'https://github.com/shadcn.png'
-
 const displayName = computed(() => {
   const info = userInfo.value as any
   return info?.nickname || info?.nickName || ''
@@ -57,11 +55,11 @@ function handleUserInfoClick() {
         <!-- 用户信息 -->
         <view class="flex animate-fade-in-up items-center gap-4" @click="handleUserInfoClick">
           <!-- 头像容器：固定宽高，防止被父容器拉伸 -->
-          <view class="group relative h-140rpx w-140rpx flex-shrink-0">
+          <view class="group relative h-140rpx w-140rpx shrink-0">
             <!-- 点击时的光圈：限制在父容器内 -->
             <view class="absolute inset-0 scale-110 rounded-full bg-[#ff7a00] opacity-0 transition-opacity duration-300 group-active:opacity-20" />
             <image
-              :src="userInfo.avatar || avatarPlaceholder"
+              :src="userInfo.avatar"
               class="relative z-10 h-full w-full border-6rpx border-white rounded-full shadow-[0_8px_20px_rgba(255,122,0,0.15)]"
               mode="aspectFill"
             />
@@ -71,7 +69,7 @@ function handleUserInfoClick() {
             />
           </view>
 
-          <view class="flex flex-col">
+          <view class="flex flex-col items-start">
             <view class="flex items-center gap-2 text-2xl text-[#333] font-black tracking-wide">
               {{ tokenStore.hasLogin ? (displayName || '铲屎官') : '欢迎加入' }}
               <view v-if="tokenStore.hasLogin" class="i-carbon-edit text-sm text-gray-400 opacity-50" />
