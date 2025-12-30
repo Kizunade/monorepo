@@ -67,7 +67,8 @@ export default defineConfig({
   ],
   shortcuts: [
     {
-      center: 'flex justify-center items-center',
+      'center': 'flex justify-center items-center',
+      'h-screen-main': 'h-[calc(100vh-50px-var(--safe-area-inset-bottom))]',
     },
   ],
   // 动态图标需要在这里配置，或者写在vue页面中注释掉

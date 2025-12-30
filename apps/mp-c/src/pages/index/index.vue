@@ -21,7 +21,7 @@ onLoad(() => {
 </script>
 
 <template>
-  <view class="relative min-h-screen flex px-4">
+  <view class="relative h-screen-main flex px-4">
     <BackgroundGlow />
     <view class="flex flex-1 flex-col items-center justify-center">
       <WdStatusTip image="/static/assets/content.png" tip="开发中..." />

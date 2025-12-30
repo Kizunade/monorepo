@@ -1,3 +1,4 @@
+import type { LocationUrl } from 'virtual:uni-pages'
 import { getAllPages } from '@/utils'
 
 export const LOGIN_STRATEGY_MAP = {
@@ -8,9 +9,23 @@ export const LOGIN_STRATEGY_MAP = {
 export const LOGIN_STRATEGY = LOGIN_STRATEGY_MAP.DEFAULT_NO_NEED_LOGIN
 export const isNeedLoginMode = LOGIN_STRATEGY === LOGIN_STRATEGY_MAP.DEFAULT_NEED_LOGIN
 
-export const LOGIN_PAGE = '/pages-fg/login/login'
-export const REGISTER_PAGE = '/pages-fg/login/register'
-export const NOT_FOUND_PAGE = '/pages-fg/404/index'
+export const PAGES: Record<string, LocationUrl> = {
+  INDEX: '/pages/index/index',
+  ME: '/pages/me/me',
+
+  LOGIN_PAGE: '/subpackage/pages-fg/login/login',
+  REGISTER_PAGE: '/subpackage/pages-fg/login/register',
+  NOT_FOUND_PAGE: '/subpackage/pages-fg/404/index',
+
+  ADDRESS_LIST: '/subpackage/pages-me/address/list',
+  ADDRESS_EDIT: '/subpackage/pages-me/address/edit',
+  SETTINGS_INDEX: '/subpackage/pages-me/settings/index',
+  SETTINGS_PROFILE: '/subpackage/pages-me/settings/profile',
+}
+
+export const LOGIN_PAGE = '/subpackage/pages-fg/login/login'
+export const REGISTER_PAGE = '/subpackage/pages-fg/login/register'
+export const NOT_FOUND_PAGE = '/subpackage/pages-fg/404/index'
 
 export const LOGIN_PAGE_LIST = [LOGIN_PAGE, REGISTER_PAGE]
 

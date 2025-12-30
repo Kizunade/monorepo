@@ -9,6 +9,15 @@ export default defineUniPages({
     navigationBarTextStyle: 'black',
     backgroundColor: '#FFFFFF',
   },
+  preloadRule: {
+    'pages/me/me': {
+      packages: ['subpackage/pages-me'],
+    },
+    // 'pages/index/index': {
+    //   network: 'all',
+    //   packages: ['subpackage/pages-main'],
+    // },
+  },
   // 开启自动引入功能后，导致所有自动引入的组件无法在 github actions 的产物中使用
   // easycom: {
   //   autoscan: true,

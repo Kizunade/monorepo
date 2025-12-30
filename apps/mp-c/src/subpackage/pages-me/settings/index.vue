@@ -2,6 +2,7 @@
 import WdButton from 'wot-design-uni/components/wd-button/wd-button.vue'
 import WdCellGroup from 'wot-design-uni/components/wd-cell-group/wd-cell-group.vue'
 import WdCell from 'wot-design-uni/components/wd-cell/wd-cell.vue'
+import { PAGES } from '@/router/config'
 import { useTokenStore } from '@/store/token'
 
 definePage({
@@ -39,7 +40,7 @@ function handleLogout() {
     <WdCellGroup border>
       <WdCell title="手机绑定" is-link clickable @click="unsupportedFeature()" />
       <WdCell title="实名认证" is-link clickable @click="unsupportedFeature()" />
-      <WdCell title="地址管理" is-link clickable @click="handleNavigate('/pages/address/list')" />
+      <WdCell title="地址管理" is-link clickable @click="handleNavigate(PAGES.ADDRESS_LIST)" />
     </WdCellGroup>
 
     <view class="mt-6 px-4">
