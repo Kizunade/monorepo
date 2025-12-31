@@ -1,20 +1,9 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { usePetStore } from '@/store/pet'
 
-interface Pet {
-  id: number
-  name: string
-  avatar: string
-  breed?: string
-  age?: string
-  gender?: 'male' | 'female'
-}
-
-const pets = ref<Pet[]>([
-  { id: 1, name: '可乐', avatar: 'https://placecats.com/200/200', breed: '加菲猫', age: '2岁', gender: 'male' },
-  { id: 2, name: '团团', avatar: 'https://placecats.com/201/200', breed: '金毛', age: '1岁', gender: 'female' },
-  { id: 3, name: '球球', avatar: 'https://placecats.com/200/201', breed: '布偶猫', age: '3个月', gender: 'female' },
-])
+const petStore = usePetStore()
+const { pets } = storeToRefs(petStore)
 
 function toastAdd() {
   uni.showToast({ title: '添加宠物', icon: 'none' })

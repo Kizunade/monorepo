@@ -4,9 +4,15 @@ import { ref } from 'vue'
 import {
   getUserInfo,
 } from '@/api/login'
+import { pick } from '@/utils/pick'
+import { usePetStore } from './pet'
+
+const storedKeys = ['userId', 'username', 'nickname', 'avatar', 'phone', 'gender', 'birthday'] as const
+type TStoredKeys = typeof storedKeys[number]
+type TUserInfoWithoutPets = Pick<IUserInfoRes, TStoredKeys>
 
 // 初始化状态
-const userInfoState: IUserInfoRes = {
+const userInfoState: TUserInfoWithoutPets = {
   userId: -1,
   username: '',
   nickname: '',
@@ -20,15 +26,15 @@ export const useUserStore = defineStore(
   'user',
   () => {
     // 定义用户信息
-    const userInfo = ref<IUserInfoRes>({ ...userInfoState })
+    const userInfo = ref<TUserInfoWithoutPets>({ ...userInfoState })
     // 设置用户信息
-    const setUserInfo = (val: IUserInfoRes) => {
+    const setUserInfo = (val: TUserInfoWithoutPets) => {
       console.log('设置用户信息', val)
       // 若头像为空 则使用默认头像
       if (!val.avatar) {
         val.avatar = userInfoState.avatar
       }
-      userInfo.value = val
+      userInfo.value = pick(val, [...storedKeys])
     }
     const setUserAvatar = (avatar: string) => {
       userInfo.value.avatar = avatar
@@ -48,6 +54,11 @@ export const useUserStore = defineStore(
       const res = await getUserInfo()
       if (res.code === 200 && res.data) {
         setUserInfo(res.data)
+        // Sync pets to petStore
+        if (res.data.pets) {
+          const petStore = usePetStore()
+          petStore.setPets(res.data.pets)
+        }
         return res.data
       }
       return null

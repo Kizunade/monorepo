@@ -1,4 +1,5 @@
 import z from 'zod'
+import { PetModel } from '../pet/model'
 
 export const TOOL_NAME = 'mp'
 
@@ -21,6 +22,7 @@ export namespace MpModel {
     phone: z.string().describe('手机号'),
     gender: z.enum(['男', '女', '保密']).describe('性别'),
     birthday: z.string().describe('生日(YYYY-MM-DD)'),
+    pets: PetModel.petList.describe('宠物列表'),
   }).describe('用户信息')
 
   export const getUserInfoResponse = z.object({
