@@ -2,9 +2,9 @@ import type { PetModel } from './model'
 
 export abstract class PetService {
   public static pets: PetModel.Pet[] = [
-    { id: 1, name: '可乐', avatar: 'https://placecats.com/200/200', breed: '加菲猫', age: '2岁', gender: 'male' },
-    { id: 2, name: '团团', avatar: 'https://placecats.com/201/200', breed: '金毛', age: '1岁', gender: 'female' },
-    { id: 3, name: '球球', avatar: 'https://placecats.com/200/201', breed: '布偶猫', age: '3个月', gender: 'female' },
+    { id: 1, name: '可乐', type: 'cat', avatar: 'https://placecats.com/200/200', breed: '加菲猫', age: '2岁', gender: 'male' },
+    { id: 2, name: '团团', type: 'dog', avatar: 'https://placedog.net/200/200', breed: '金毛', age: '1岁', gender: 'female', weight: 15 },
+    { id: 3, name: '球球', type: 'cat', avatar: 'https://placecats.com/200/201', breed: '布偶猫', age: '3个月', gender: 'female' },
   ]
 
   static async getList(): Promise<PetModel.GetPetListResponse> {
@@ -50,6 +50,18 @@ export abstract class PetService {
     return {
       code: 200,
       msg: '删除成功',
+    }
+  }
+
+  static async findById(args: PetModel.FindByIdParams): Promise<PetModel.FindByIdResponse> {
+    const pet = this.pets.find(p => p.id === args.id)
+    if (!pet) {
+      throw new Error('Pet not found')
+    }
+    return {
+      code: 200,
+      msg: '获取成功',
+      data: pet,
     }
   }
 }

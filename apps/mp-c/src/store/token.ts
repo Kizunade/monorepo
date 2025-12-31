@@ -1,4 +1,5 @@
 import type { MpModel } from '@mock/mp/model'
+import { isMpWeixin } from '@uni-helper/uni-env'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue' // 修复：导入 computed
 import {
@@ -80,17 +81,23 @@ export const useTokenStore = defineStore(
      */
     const wxLogin = async () => {
       try {
-        // 获取微信小程序登录的code
-        const code = await getWxCode()
-        console.log('微信登录-code: ', code)
-        const res = await _wxLogin(code)
-        console.log('微信登录-res: ', res)
-        await _postLogin(res)
-        // uni.showToast({
-        //   title: '登录成功',
-        //   icon: 'success',
-        // })
-        return res
+        if (isMpWeixin) {
+          // 获取微信小程序登录的code
+          const code = await getWxCode()
+          console.log('微信登录-code: ', code)
+          const res = await _wxLogin(code)
+          console.log('微信登录-res: ', res)
+          await _postLogin(res)
+          // uni.showToast({
+          //   title: '登录成功',
+          //   icon: 'success',
+          // })
+          return res
+        }
+        else {
+          const res = await _wxLogin({ code: 'demo' })
+          await _postLogin(res)
+        }
       }
       catch (error) {
         console.error('微信登录失败:', error)

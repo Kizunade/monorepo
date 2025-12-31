@@ -72,7 +72,8 @@ globs: apps/mp-c/**
 ## 页面开发
 - 页面文件放在 [src/pages/]目录下
 - 使用约定式路由，文件名即路由路径
-- 页面配置在仅需要在 宏`definePage` 中配置标题等内容即可，会自动生成到 `pages.json` 中
+- 页面配置在宏 `definePage` 中配置标题等内容，会自动生成到 `pages.json` 中
+- 为了方便之后重构和分包，需要在 [src/router/pages.ts] 中定义页面路径
 
 ## 组件开发
 - **首选组件库**：**Wot Design Uni** (wot-ui)。项目已配置相关 CSS 变量，优先使用其提供的组件以保持风格一致。

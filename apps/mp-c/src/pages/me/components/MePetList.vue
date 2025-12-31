@@ -1,12 +1,21 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
+import { PAGES } from '@/router/config'
 import { usePetStore } from '@/store/pet'
 
 const petStore = usePetStore()
 const { pets } = storeToRefs(petStore)
 
-function toastAdd() {
-  uni.showToast({ title: '添加宠物', icon: 'none' })
+function goToPetList() {
+  uni.navigateTo({ url: PAGES.PET_LIST })
+}
+
+function goToPetDetail(id: number) {
+  uni.navigateTo({ url: `${PAGES.PET_DETAIL}?id=${id}` })
+}
+
+function goToPetCreate() {
+  uni.navigateTo({ url: PAGES.PET_EDIT })
 }
 </script>
 
@@ -17,7 +26,7 @@ function toastAdd() {
         <text class="relative z-10 text-xl text-[#333] font-black">毛孩子</text>
         <view class="absolute bottom-1 left-0 z-0 h-3 w-full rounded-full bg-[#ff7a00] opacity-20" />
       </view>
-      <view class="flex items-center rounded-lg bg-white px-2 py-1 text-xs text-[#999] font-medium active:bg-gray-50" @click="toastAdd">
+      <view class="flex items-center rounded-lg bg-white px-2 py-1 text-xs text-[#999] font-medium active:bg-gray-50" @click="goToPetList">
         管理档案 <view class="i-carbon-chevron-right ml-1" />
       </view>
     </view>
@@ -29,6 +38,7 @@ function toastAdd() {
           v-for="(pet, index) in pets"
           :key="pet.id"
           :class="` relative box-border h-320rpx w-240rpx flex shrink-0 flex-col items-center justify-center rounded-[32rpx] bg-white p-4 shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all active:scale-95 ${index % 2 === 0 ? '-rotate-1deg' : 'rotate-1deg'}`"
+          @click="goToPetDetail(pet.id)"
         >
           <view class="relative mb-3">
             <image :src="pet.avatar" class="h-140rpx w-140rpx rounded-[28rpx] bg-gray-50" mode="aspectFill" />
@@ -50,7 +60,7 @@ function toastAdd() {
         <!-- 添加卡片 -->
         <view
           class="box-border h-320rpx w-240rpx flex shrink-0 flex-col items-center justify-center gap-3 border-2 border-[#E0E0E0] rounded-[32rpx] border-dashed bg-[#FAFAFA] p-4 transition-colors active:bg-[#F5F5F5]"
-          @click="toastAdd"
+          @click="goToPetCreate"
         >
           <view class="h-12 w-12 flex items-center justify-center rounded-full bg-white shadow-sm">
             <view class="i-carbon-add text-xl text-[#ccc]" />

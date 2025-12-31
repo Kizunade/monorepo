@@ -1,4 +1,3 @@
-import type { LocationUrl } from 'virtual:uni-pages'
 import { getAllPages } from '@/utils'
 
 export const LOGIN_STRATEGY_MAP = {

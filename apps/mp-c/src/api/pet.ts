@@ -16,3 +16,7 @@ export function updatePet(data: PetModel.UpdatePetParams) {
 export function deletePet(data: PetModel.DeletePetParams) {
   return http.Post<PetModel.DeletePetResponse>('/pet/delete', data)
 }
+
+export function getPetDetail(data: PetModel.FindByIdParams) {
+  return http.Get<PetModel.FindByIdResponse>('/pet/detail', { params: data })
+}

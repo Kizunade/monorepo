@@ -8,6 +8,9 @@ export const PAGES = {
 
   ADDRESS_LIST: '/subpackage/pages-me/address/list',
   ADDRESS_EDIT: '/subpackage/pages-me/address/edit',
+  PET_LIST: '/subpackage/pages-me/pet/list',
+  PET_EDIT: '/subpackage/pages-me/pet/edit',
+  PET_DETAIL: '/subpackage/pages-me/pet/detail',
   SETTINGS_INDEX: '/subpackage/pages-me/settings/index',
   SETTINGS_PROFILE: '/subpackage/pages-me/settings/profile',
 } as const
@@ -22,8 +25,19 @@ export const PAGE_NAMES: Record<keyof typeof PAGES, string> = {
 
   ADDRESS_LIST: '地址列表',
   ADDRESS_EDIT: '编辑地址',
+  PET_LIST: '宠物档案',
+  PET_EDIT: '编辑宠物',
+  PET_DETAIL: '宠物详情',
   SETTINGS_INDEX: '设置',
   SETTINGS_PROFILE: '个人信息',
+}
+
+export const PAGE_QUERIES: {
+  [key in keyof typeof PAGES]?: Record<string, string>
+} = {
+  PET_DETAIL: {
+    id: '1',
+  },
 }
 
 export function getCurrentPageIndex(page: keyof typeof PAGES) {

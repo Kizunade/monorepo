@@ -69,6 +69,21 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
       },
     },
   )
+  .get(
+    '/detail',
+    ({ query }) => {
+      return PetService.findById(query as unknown as PetModel.FindByIdParams)
+    },
+    {
+      query: PetModel.findByIdParams,
+      response: PetModel.findByIdResponse,
+      detail: {
+        summary: '获取宠物详情',
+        tags: ['宠物管理'],
+        operationId: 'getPetDetail',
+      },
+    },
+  )
 
 export const GET = app.fetch
 export const POST = app.fetch

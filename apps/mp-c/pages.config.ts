@@ -1,10 +1,17 @@
+import type { UserPagesConfig } from '@uni-helper/vite-plugin-uni-pages'
 import { defineUniPages } from '@uni-helper/vite-plugin-uni-pages'
-import { getCurrentPageIndex, PAGE_NAMES, PAGES } from './src/router/pages'
+import { getCurrentPageIndex, PAGE_NAMES, PAGE_QUERIES, PAGES } from './src/router/pages'
 import { tabBar } from './src/tabbar/config'
 
-const pageList = Object.entries(PAGES).map(item => ({
+function getPageQueries(page: string) {
+  const queryObject = PAGE_QUERIES[page] || {}
+  return Object.entries(queryObject).map(item => `${item[0]}=${item[1]}`).join('&')
+}
+
+const pageList: UserPagesConfig['condition']['list'] = Object.entries(PAGES).map(item => ({
   name: PAGE_NAMES[item[0]],
   path: item[1],
+  query: getPageQueries(item[0]),
 }))
 
 export default defineUniPages({
