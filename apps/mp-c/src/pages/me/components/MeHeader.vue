@@ -7,6 +7,12 @@ import { useUserStore } from '@/store'
 import { useTokenStore } from '@/store/token'
 import MeStats from './MeStats.vue'
 
+defineProps<{
+  animationStyle?: {
+    transform?: string
+    filter?: string
+  }
+}>()
 const userStore = useUserStore()
 const tokenStore = useTokenStore()
 const { userInfo } = storeToRefs(userStore)
@@ -39,7 +45,7 @@ function handleUserInfoClick() {
 </script>
 
 <template>
-  <view class="relative w-full overflow-hidden pb-10">
+  <view class="relative w-full overflow-hidden pb-10" :style="animationStyle">
     <!-- 导航栏 (z-50) - 始终固定在顶部 -->
     <WdNavbar :bordered="false" custom-style="background-color: transparent;" safe-area-inset-top />
     <!-- 背景层 -->
