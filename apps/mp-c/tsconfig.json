@@ -51,6 +51,7 @@
     "src/**/*.jsx",
     "src/**/*.vue",
     "src/**/*.json",
+    "pages.config.ts",
     "../mock-server/src/app/api/mock/**/model.ts"
   ],
   "exclude": [

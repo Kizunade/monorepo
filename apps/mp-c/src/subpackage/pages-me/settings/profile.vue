@@ -4,7 +4,6 @@ import { reactive, ref } from 'vue'
 import { useToast } from 'wot-design-uni'
 import WdButton from 'wot-design-uni/components/wd-button/wd-button.vue'
 import WdCellGroup from 'wot-design-uni/components/wd-cell-group/wd-cell-group.vue'
-import WdCell from 'wot-design-uni/components/wd-cell/wd-cell.vue'
 import WdDatetimePicker from 'wot-design-uni/components/wd-datetime-picker/wd-datetime-picker.vue'
 import WdInput from 'wot-design-uni/components/wd-input/wd-input.vue'
 import WdPicker from 'wot-design-uni/components/wd-picker/wd-picker.vue'
@@ -131,7 +130,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <view class="bg-wot-bg min-h-screen py-4">
+  <view class="min-h-screen bg-wot-bg py-4">
     <wd-toast />
 
     <view class="mb-4 flex flex-col items-center justify-center bg-white p-4">
@@ -140,8 +139,8 @@ async function handleSubmit() {
         open-type="chooseAvatar"
         @chooseavatar="onChooseAvatar"
       >
-        <image :src="formData.avatar" class="bg-wot-disabled h-160rpx w-160rpx rounded-full" mode="aspectFill" />
-        <view class="text-wot-content mt-2 text-sm">
+        <image :src="formData.avatar" class="h-160rpx w-160rpx rounded-full bg-wot-disabled" mode="aspectFill" />
+        <view class="mt-2 text-sm text-wot-content">
           点击修改头像
         </view>
       </button>

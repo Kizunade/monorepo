@@ -63,3 +63,10 @@ export function wxLogin(params: MpModel.LoginParams) {
     params,
   })
 }
+
+/**
+ * 获取全局配置
+ */
+export function getGlobalConfig() {
+  return http.Get<MpModel.GlobalConfigResponse>('/mp/globalConfig')
+}
