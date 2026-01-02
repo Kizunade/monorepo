@@ -3,13 +3,16 @@
 >
 import { onHide, onLaunch, onShow } from '@dcloudio/uni-app'
 import { navigateToInterceptor } from '@/router/interceptor'
-import { useTokenStore } from '@/store'
+import { useGlobalConfigStore, useTokenStore } from '@/store'
 
+const globalConfigStore = useGlobalConfigStore()
 const tokenStore = useTokenStore()
 onLaunch(async (options) => {
   console.log('App.vue onLaunch', options)
+  // 静默登录
   const loginRes = await tokenStore.ensureUserLogin()
   console.log('静默登录：', loginRes)
+  globalConfigStore.fetchConfig()
 })
 onShow((options) => {
   console.log('App.vue onShow', options)

@@ -2,14 +2,11 @@
   lang="ts"
 >
 import { ref } from 'vue'
-import { useGlobalConfigStore, useTokenStore } from '@/store'
 import FgTabbar from '@/tabbar/index.vue'
 import { isPageTabbar } from '@/tabbar/store'
 import { currRoute } from '@/utils'
 
 const isCurrentPageTabbar = ref(true)
-const tokenStore = useTokenStore()
-const globalConfigStore = useGlobalConfigStore()
 onShow(() => {
   console.log('App.ku.vue onShow', currRoute())
   const { path } = currRoute()
@@ -25,11 +22,6 @@ onShow(() => {
 })
 
 onLaunch(async () => {
-  // 静默登录
-  const loginRes = await tokenStore.ensureUserLogin()
-  console.log('App.ku.vue onLaunch: login res -> ', loginRes)
-  // 获取全局配置
-  globalConfigStore.fetchConfig()
 })
 
 const helloKuRoot = ref('Hello AppKuVue')

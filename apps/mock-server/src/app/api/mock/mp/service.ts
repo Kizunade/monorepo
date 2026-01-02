@@ -69,10 +69,13 @@ export abstract class MpService {
       code: 200,
       msg: 'success',
       data: {
-        abTest: {
-          newHome: true,
-          promotion: false,
-        },
+        abTest: [
+          { name: 'newHome', value: 'control' },
+          { name: 'promotion', value: 'control' },
+        ],
+        mockList: [
+          '/pet/detail',
+        ],
         switches: {
           enableChat: true,
           enablePayment: true,

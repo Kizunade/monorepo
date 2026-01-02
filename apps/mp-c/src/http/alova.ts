@@ -5,8 +5,9 @@ import { isMpWeixin } from '@uni-helper/uni-env'
 import { createAlova } from 'alova'
 import { createServerTokenAuthentication } from 'alova/client'
 import VueHook from 'alova/vue'
+import { useGlobalConfigStore } from '@/store/globalConfig'
 import { toLoginPage } from '@/utils/toLoginPage'
-import { mockList } from './mockList'
+import { mockList as localMockList } from './mockList'
 import { ContentTypeEnum, ResultEnum, ShowMessage } from './tools/enum'
 
 // 配置动态Tag
@@ -14,6 +15,7 @@ export const API_DOMAINS = {
   DEFAULT: import.meta.env.VITE_SERVER_BASEURL,
   SECONDARY: import.meta.env.VITE_SERVER_BASEURL_SECONDARY,
   DEV: import.meta.env.VITE_SERVER_BASEURL__DEV,
+  LOCAL: import.meta.env.VITE_SERVER_BASEURL__LOCAL,
 }
 
 /**
@@ -87,7 +89,13 @@ const alovaInstance = createAlova({
     }
 
     // 处理mock列表
-    if (mockList.includes(url) && isDevMode) {
+    const globalConfigStore = useGlobalConfigStore()
+    const globalMockList = globalConfigStore.config?.mockList || []
+
+    if (isDevMode && localMockList.includes(url)) {
+      method.baseURL = API_DOMAINS.LOCAL
+    }
+    else if (globalMockList.includes(url)) {
       method.baseURL = API_DOMAINS.DEV
     }
 

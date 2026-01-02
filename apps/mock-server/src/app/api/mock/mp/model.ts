@@ -59,7 +59,11 @@ export namespace MpModel {
   }).describe('文件上传响应')
 
   export const globalConfig = z.object({
-    abTest: z.record(z.string(), z.boolean()).describe('AB测试开关'),
+    abTest: z.array(z.object({
+      name: z.string(),
+      value: z.string(),
+    })).describe('AB测试开关'),
+    mockList: z.array(z.string()).describe('模拟接口列表'),
     switches: z.record(z.string(), z.boolean()).describe('功能开关'),
     formOptions: z.object({
       petTypes: z.array(z.object({ label: z.string(), value: z.string() })).describe('宠物类型选项'),

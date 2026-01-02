@@ -1,5 +1,3 @@
-import { computed } from 'vue'
-
 export function usePetHelper() {
   const typeOptions = [
     { label: '猫', value: 'cat' },

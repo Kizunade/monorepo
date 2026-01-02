@@ -189,11 +189,11 @@ export const useTokenStore = defineStore(
      */
     const ensureUserLogin = async () => {
       updateNowTime()
-      if (hasValidLogin.value) {
-        const userStore = useUserStore()
-        await userStore.ensureUserInfo()
-        return
+      if (!hasValidLogin.value) {
+        await wxLogin()
       }
+      const userStore = useUserStore()
+      return await userStore.ensureUserInfo()
 
       // 未登录，跳转登录页
       // uni.navigateTo({ url: LOGIN_PAGE })
@@ -201,7 +201,6 @@ export const useTokenStore = defineStore(
       //   loginResolve = resolve
       //   loginReject = reject
       // })
-      return await wxLogin()
     }
 
     const loginSuccess = (res?: any) => {
