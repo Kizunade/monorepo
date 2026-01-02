@@ -10,7 +10,6 @@ import WdForm from 'wot-design-uni/components/wd-form/wd-form.vue'
 import WdInput from 'wot-design-uni/components/wd-input/wd-input.vue'
 import WdPicker from 'wot-design-uni/components/wd-picker/wd-picker.vue'
 import { getPetDetail } from '@/api/pet'
-import PageBackground from '@/components/PageBackground.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import { usePetHelper } from '@/hooks/usePetHelper'
 import { useGlobalConfigStore, usePetStore } from '@/store'
@@ -38,6 +37,7 @@ const formData = ref<PetModel.AddPetParams & Partial<Pick<PetModel.Pet, 'id'>>>(
   gender: 'female',
   weight: undefined,
   sterilized: false,
+  isOwner: true,
 })
 
 const rules: FormProps['rules'] = {
@@ -141,39 +141,40 @@ onLoad(async (options) => {
 
 <template>
   <view class="relative min-h-screen bg-page">
-    <PageBackground />
-
-    <view class="relative z-10 p-4 space-y-4">
+    <view class="relative z-10 p-4 pb-32 space-y-4">
       <PageHeader :title="pageTitle" subtitle="完整的信息会让服务人员更懂它" />
 
       <!-- Content Card -->
-      <view class="overflow-hidden rounded-[36rpx] bg-card p-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-        <!-- Avatar Section (Original Style) -->
-        <view class="relative overflow-hidden rounded-[32rpx] from-orange-50 to-amber-50 bg-gradient-to-br p-4">
-          <view class="pointer-events-none absolute h-50 w-50 rounded-full bg-white/60 blur-2xl -right-10 -top-10" />
-          <view class="pointer-events-none absolute bottom-0 h-60 w-60 rounded-full bg-orange-200/30 blur-3xl -left-12" />
-
+      <view class="overflow-hidden border border-gray-100 rounded-2xl bg-white p-4 shadow-sm">
+        <!-- Avatar Section (Refined Style) -->
+        <view class="relative overflow-hidden border border-orange-100/50 rounded-xl bg-orange-50/50 p-4">
           <view class="relative z-10 flex items-center gap-4">
-            <view class="relative h-22 w-22 shrink-0">
-              <view class="absolute inset-0 rounded-[36rpx] bg-white/70 blur-sm" />
-              <image :src="formData.avatar" class="relative z-10 h-22 w-22 rounded-[36rpx] bg-gray-100 shadow-sm" mode="aspectFill" />
+            <view class="relative h-20 w-20 shrink-0">
+              <image
+                :src="formData.avatar"
+                class="relative z-10 h-20 w-20 border border-white rounded-xl bg-gray-100 object-cover shadow-sm"
+                mode="aspectFill"
+              />
+              <view class="absolute z-20 rounded-full bg-white p-1 shadow-sm -bottom-1 -right-1">
+                <view class="i-carbon-camera text-base text-gray-500" />
+              </view>
             </view>
 
             <view class="min-w-0 flex-1">
-              <view class="flex flex-wrap items-center gap-2">
-                <view class="rounded-full bg-white/70 px-3 py-1 text-xs text-tips shadow-sm">
+              <view class="mb-3 flex flex-wrap items-center gap-2">
+                <view class="border border-gray-100 rounded-lg bg-white px-2.5 py-1 text-xs text-gray-600 shadow-sm">
                   类型：{{ typeLabel }}
                 </view>
-                <view class="rounded-full bg-white/70 px-3 py-1 text-xs text-tips shadow-sm">
+                <view class="border border-gray-100 rounded-lg bg-white px-2.5 py-1 text-xs text-gray-600 shadow-sm">
                   性别：{{ genderLabel }}
                 </view>
               </view>
-              <view class="mt-3 flex gap-2">
-                <WdButton size="small" type="primary" plain custom-class="!h-7 !rounded-full !text-xs !px-3" @click="chooseAvatar">
-                  选择头像
+              <view class="flex gap-2">
+                <WdButton size="small" type="primary" plain custom-class="!h-7 !rounded-full !text-xs !px-3 !border-orange-200 !text-orange-600 !bg-white" @click="chooseAvatar">
+                  更换头像
                 </WdButton>
-                <WdButton size="small" type="info" plain custom-class="!h-7 !rounded-full !text-xs !px-3" @click="applyDefaultAvatar">
-                  使用默认
+                <WdButton size="small" type="info" plain custom-class="!h-7 !rounded-full !text-xs !px-3 !border-gray-200 !text-gray-500 !bg-white" @click="applyDefaultAvatar">
+                  恢复默认
                 </WdButton>
               </view>
             </view>
@@ -181,7 +182,7 @@ onLoad(async (options) => {
         </view>
 
         <!-- Form Section -->
-        <view class="mt-4 overflow-hidden rounded-[28rpx] bg-white">
+        <view class="mt-4">
           <WdForm ref="form" :model="formData" :rules="rules" error-type="toast">
             <WdCellGroup border>
               <WdInput v-model="formData.name" label="昵称" placeholder="例如：可乐" prop="name" clearable />
@@ -232,8 +233,14 @@ onLoad(async (options) => {
       </view>
     </view>
 
-    <view class="fixed bottom-0 left-0 right-0 z-20 border-t border-white/60 bg-white/70 p-4 backdrop-blur-md pb-safe">
-      <WdButton block type="primary" custom-class="!rounded-full !h-11 !text-base !font-bold" @click="handleSave">
+    <view class="fixed bottom-0 left-0 right-0 z-20 border-t border-gray-100 bg-white/90 p-4 backdrop-blur-md pb-safe">
+      <WdButton
+        block
+        type="primary"
+        custom-class="shadow-orange-500/20 shadow-lg"
+        size="large"
+        @click="handleSave"
+      >
         保存
       </WdButton>
     </view>

@@ -88,6 +88,7 @@ export default defineConfig({
     colors: {
       /** 主题色 */
       'primary': 'var(--color-primary)',
+      'primary-light': 'var(--color-primary-light)',
 
       /** 功能色 */
       'success': 'var(--color-success)',
@@ -109,12 +110,21 @@ export default defineConfig({
 
       /** 边框颜色 */
       'border': 'var(--border-color)',
-      'border-dark': 'var(--border-color-dark)',
+      'border-light': 'var(--border-light)',
+      'border-dark': 'var(--border-dark)',
 
       // 兼容原有命名 (optional)
       'gray': {
-        100: 'var(--bg-page)', // usually mapped to light gray
-        400: 'var(--text-tertiary)',
+        50: '#f9fafb',
+        100: '#f3f4f6',
+        200: '#e5e7eb',
+        300: '#d1d5db',
+        400: '#9ca3af',
+        500: '#6b7280',
+        600: '#4b5563',
+        700: '#374151',
+        800: '#1f2937',
+        900: '#111827',
       },
 
       /** Wot Design Uni Colors */

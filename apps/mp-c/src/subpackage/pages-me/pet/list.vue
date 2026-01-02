@@ -3,7 +3,6 @@ import { onPullDownRefresh, onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
 import WdButton from 'wot-design-uni/components/wd-button/wd-button.vue'
 import WdStatusTip from 'wot-design-uni/components/wd-status-tip/wd-status-tip.vue'
-import PageBackground from '@/components/PageBackground.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import { PAGES } from '@/router/config'
 import { usePetStore } from '@/store'
@@ -67,24 +66,26 @@ onShow(async () => {
 
 <template>
   <view class="relative min-h-screen bg-page">
-    <PageBackground />
-
     <view class="relative z-10 px-4 pt-4">
       <PageHeader title="宠物档案" :subtitle="`共 ${pets.length} 只 · 记录它们的小习惯和小秘密`" />
     </view>
 
-    <view v-if="pets.length === 0" class="relative z-10 flex flex-col items-center justify-center px-4">
-      <view class="w-full rounded-[36rpx] bg-white/80 p-6 shadow-sm backdrop-blur">
+    <view v-if="pets.length === 0" class="relative z-10 mt-8 flex flex-col items-center justify-center px-4">
+      <view class="w-full border border-gray-100 rounded-2xl bg-white p-6 shadow-sm">
         <WdStatusTip image="/static/assets/content.png" tip="暂无宠物档案" />
-        <view class="mt-5">
-          <WdButton block type="primary" custom-class="!rounded-full" @click="goAdd">
+        <view class="mt-6 flex justify-center">
+          <WdButton
+            type="primary"
+            custom-class="!rounded-full !px-8 !h-10 !text-sm !font-medium shadow-orange-500/20 shadow-lg"
+            @click="goAdd"
+          >
             立即添加第一只
           </WdButton>
         </view>
       </view>
     </view>
 
-    <view v-else class="relative z-10 flex flex-col gap-4 px-4">
+    <view v-else class="relative z-10 mt-4 flex flex-col gap-3 px-4 pb-24">
       <PetListCard
         v-for="pet in pets"
         :key="pet.id"
@@ -97,15 +98,12 @@ onShow(async () => {
 
     <!-- Floating Action Button for Add -->
     <view class="fixed bottom-10 right-6 z-20">
-      <view class="rounded-full shadow-gray-500/20 shadow-lg">
-        <WdButton
-          type="primary"
-          custom-class="!h-14 !w-14 !rounded-full !p-0 !flex !items-center !justify-center"
-          @click="goAdd"
-        >
-          <view class="i-carbon-add text-3xl text-white font-bold" />
-        </WdButton>
-      </view>
+      <WdButton
+        type="icon"
+        icon="add"
+        custom-class="!bg-primary !text-inverse shadow-lg shadow-orange-500/20 transition-transform active:scale-95"
+        @click="goAdd"
+      />
     </view>
   </view>
 </template>

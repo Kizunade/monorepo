@@ -39,23 +39,23 @@ function handleLogout() {
 </script>
 
 <template>
-  <view class="mt-6 animate-fade-in-up px-6 pb-8 delay-400">
+  <view class="mt-4 animate-fade-in-up px-4 pb-8 delay-400">
     <view class="flex flex-col gap-3">
       <view
         v-for="item in serviceItems"
         :key="item.key"
-        class="group flex items-center justify-between rounded-[28rpx] bg-white p-4 shadow-sm transition-all active:scale-[0.99]"
+        class="group flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm transition-all active:scale-[0.99]"
         @click="handleAction(item.key)"
       >
-        <view class="flex items-center gap-4">
-          <view class="h-10 w-10 flex items-center justify-center rounded-full bg-[#F7F8FA] text-[#666] transition-colors group-active:bg-[#ff7a00] group-active:text-white">
-            <view :class="item.icon" class="text-lg" />
+        <view class="flex items-center gap-3">
+          <view class="h-9 w-9 flex items-center justify-center rounded-full bg-gray-50 text-content transition-colors group-active:bg-primary group-active:text-white">
+            <view :class="item.icon" class="text-base" />
           </view>
           <view class="flex flex-col">
-            <view class="text-sm text-[#333] font-bold">
+            <view class="text-sm text-main font-bold">
               {{ item.label }}
             </view>
-            <view class="text-[10px] text-[#999]">
+            <view class="text-[10px] text-tips">
               {{ item.desc }}
             </view>
           </view>
@@ -64,9 +64,9 @@ function handleLogout() {
       </view>
 
       <!-- 退出登录 (Ghost Button Style) -->
-      <view v-if="tokenStore.hasLogin" class="mt-4">
+      <view v-if="tokenStore.hasLogin" class="mt-2">
         <button
-          class="w-full border border-[#ff7a00] rounded-full bg-transparent py-3 text-sm text-[#ff7a00] font-bold transition-colors after:border-none active:bg-[#ff7a00] active:text-white"
+          class="w-full border border-primary rounded-full bg-transparent py-2.5 text-sm text-primary font-bold transition-colors after:border-none active:bg-primary active:text-white"
           @click="handleLogout"
         >
           退出当前账号

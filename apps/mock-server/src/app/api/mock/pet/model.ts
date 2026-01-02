@@ -13,6 +13,7 @@ export namespace PetModel {
     gender: z.enum(['male', 'female']).optional().describe('宠物性别'),
     weight: z.number().optional().describe('体重(kg)'),
     sterilized: z.boolean().optional().describe('是否绝育'),
+    isOwner: z.boolean().optional().default(false).describe('是否是当前用户的宠物'),
   }).describe('宠物信息')
 
   export const petList = z.array(pet).describe('宠物列表')

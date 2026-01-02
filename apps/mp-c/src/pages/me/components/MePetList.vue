@@ -20,52 +20,52 @@ function goToPetCreate() {
 </script>
 
 <template>
-  <view class="mt-8 animate-fade-in-up delay-200">
-    <view class="flex items-end justify-between px-6">
+  <view class="mt-6 animate-fade-in-up delay-200">
+    <view class="flex items-end justify-between px-4">
       <view class="relative">
-        <text class="relative z-10 text-xl text-[#333] font-black">毛孩子</text>
-        <view class="absolute bottom-1 left-0 z-0 h-3 w-full rounded-full bg-[#ff7a00] opacity-20" />
+        <text class="relative z-10 text-lg text-main font-bold">毛孩子</text>
+        <view class="absolute bottom-1 left-0 z-0 h-2.5 w-full rounded-full bg-primary opacity-20" />
       </view>
-      <view class="flex items-center rounded-lg bg-white px-2 py-1 text-xs text-[#999] font-medium active:bg-gray-50" @click="goToPetList">
-        管理档案 <view class="i-carbon-chevron-right ml-1" />
+      <view class="flex items-center rounded-lg bg-white px-2 py-0.5 text-xs text-tips font-medium active:bg-gray-50" @click="goToPetList">
+        管理档案 <view class="i-carbon-chevron-right ml-0.5" />
       </view>
     </view>
 
     <scroll-view scroll-x class="w-screen whitespace-nowrap" :show-scrollbar="false">
-      <view class="inline-flex gap-4 p-6 pt-4">
+      <view class="inline-flex gap-3 p-4 pt-3">
         <!-- 宠物卡片 -->
         <view
           v-for="(pet, index) in pets"
           :key="pet.id"
-          :class="` relative box-border h-320rpx w-240rpx flex shrink-0 flex-col items-center justify-center rounded-[32rpx] bg-white p-4 shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all active:scale-95 ${index % 2 === 0 ? '-rotate-1deg' : 'rotate-1deg'}`"
+          :class="` relative box-border h-40 w-28 flex shrink-0 flex-col items-center justify-center rounded-2xl bg-white p-3 shadow-sm transition-all active:scale-95 ${index % 2 === 0 ? '-rotate-1' : 'rotate-1'}`"
           @click="goToPetDetail(pet.id)"
         >
-          <view class="relative mb-3">
-            <image :src="pet.avatar" class="h-140rpx w-140rpx rounded-[28rpx] bg-gray-50" mode="aspectFill" />
+          <view class="relative mb-2.5">
+            <image :src="pet.avatar" class="h-16 w-16 rounded-xl bg-gray-50" mode="aspectFill" />
             <view
-              class="absolute box-border h-8 w-8 flex items-center justify-center border-2 border-white rounded-full shadow-sm -bottom-2 -right-2"
+              class="absolute box-border h-6 w-6 flex items-center justify-center border-2 border-white rounded-full shadow-sm -bottom-1.5 -right-1.5"
               :class="pet.gender === 'male' ? 'bg-blue-100 text-blue-500' : 'bg-pink-100 text-pink-500'"
             >
-              <view :class="pet.gender === 'male' ? 'i-carbon-gender-male' : 'i-carbon-gender-female'" class="text-sm font-bold" />
+              <view :class="pet.gender === 'male' ? 'i-carbon-gender-male' : 'i-carbon-gender-female'" class="text-xs font-bold" />
             </view>
           </view>
-          <view class="mb-1 text-base text-[#333] font-bold">
+          <view class="mb-0.5 max-w-full truncate px-1 text-sm text-main font-bold">
             {{ pet.name }}
           </view>
-          <view class="rounded-md bg-[#F5F7FA] px-2 py-0.5 text-xs text-[#999]">
+          <view class="max-w-full truncate rounded bg-gray-50 px-1.5 py-0.5 text-[10px] text-tips">
             {{ pet.breed }}
           </view>
         </view>
 
         <!-- 添加卡片 -->
         <view
-          class="box-border h-320rpx w-240rpx flex shrink-0 flex-col items-center justify-center gap-3 border-2 border-[#E0E0E0] rounded-[32rpx] border-dashed bg-[#FAFAFA] p-4 transition-colors active:bg-[#F5F5F5]"
+          class="box-border h-40 w-28 flex shrink-0 flex-col items-center justify-center gap-2 border border-border rounded-2xl border-dashed bg-gray-50 p-3 transition-colors active:bg-gray-100"
           @click="goToPetCreate"
         >
-          <view class="h-12 w-12 flex items-center justify-center rounded-full bg-white shadow-sm">
-            <view class="i-carbon-add text-xl text-[#ccc]" />
+          <view class="h-10 w-10 flex items-center justify-center rounded-full bg-white shadow-sm">
+            <view class="i-carbon-add text-lg text-tips" />
           </view>
-          <view class="text-xs text-[#999] font-medium">
+          <view class="text-xs text-tips font-medium">
             添加爱宠
           </view>
         </view>

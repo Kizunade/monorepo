@@ -28,25 +28,25 @@ function handlePageNavigate(url: string) {
 </script>
 
 <template>
-  <view class="animate-fade-in-up px-6 delay-300">
-    <view class="rounded-[40rpx] bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
-      <view class="mb-5 border-l-4 border-[#ff7a00] pl-2 text-base text-[#333] font-bold">
+  <view class="animate-fade-in-up px-4 delay-300">
+    <view class="rounded-2xl bg-white p-4 shadow-sm">
+      <view class="mb-4 border-l-4 border-primary pl-2 text-base text-main font-bold">
         常用工具
       </view>
-      <view class="grid grid-cols-3 gap-y-6">
+      <view class="grid grid-cols-3 gap-y-4">
         <view
           v-for="item in menuItems"
           :key="item.key"
-          class="flex flex-col items-center gap-2 active:opacity-60"
+          class="flex flex-col items-center gap-1.5 active:opacity-60"
           @click="item.url ? handlePageNavigate(item.url) : handleAction(item.key)"
         >
           <view
-            class="h-12 w-12 flex items-center justify-center rounded-2xl text-xl shadow-sm transition-transform active:scale-90"
+            class="h-10 w-10 flex items-center justify-center rounded-xl text-lg transition-transform active:scale-90"
             :class="[item.bg, item.color]"
           >
             <view :class="item.icon" />
           </view>
-          <view class="text-xs text-[#555] font-medium">
+          <view class="text-xs text-content font-medium">
             {{ item.label }}
           </view>
         </view>

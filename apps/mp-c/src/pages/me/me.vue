@@ -56,7 +56,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <view class="w-screen overflow-hidden bg-[#FFF8F5]">
+  <view class="w-screen overflow-hidden bg-page">
     <!-- 滚动容器 -->
     <scroll-view scroll-y class="h-screen-main w-full" :show-scrollbar="false">
       <!-- 滚动监听锚点：高度决定了动画的行程 -->
@@ -71,7 +71,7 @@ onUnmounted(() => {
       <!-- 滚动内容层 (z-10) -->
       <!-- 设置相对定位和背景色，向上滚动时覆盖头部 -->
       <!-- 负 margin 制造一点重叠效果，让圆角衔接更自然 -->
-      <view class="relative z-10 overflow-hidden rounded-t-[40rpx] bg-[#FFF8F5] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] -mt-4">
+      <view class="relative z-10 overflow-hidden rounded-t-[32rpx] bg-page shadow-[0_-10px_40px_rgba(0,0,0,0.02)] -mt-4">
         <!-- 宠物家庭 -->
         <MePetList />
 

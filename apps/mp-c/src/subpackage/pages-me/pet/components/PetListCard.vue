@@ -17,15 +17,15 @@ const { getTypeLabel, getGenderLabel } = usePetHelper()
 
 <template>
   <view
-    class="relative overflow-hidden rounded-[36rpx] bg-white p-4 shadow-sm transition-all active:scale-[0.98]"
+    class="relative overflow-hidden border border-gray-100 rounded-2xl bg-white p-4 shadow-sm transition-all active:scale-[0.98]"
     @click="emit('click', pet.id)"
   >
-    <view class="flex items-center gap-4">
+    <view class="flex items-center gap-3">
       <!-- Avatar -->
-      <view class="relative h-18 w-18 shrink-0">
+      <view class="relative h-16 w-16 shrink-0">
         <image
           :src="pet.avatar"
-          class="relative z-10 h-18 w-18 rounded-[28rpx] bg-gray-50"
+          class="relative z-10 h-16 w-16 rounded-xl bg-gray-50 object-cover"
           mode="aspectFill"
         />
       </view>
@@ -34,39 +34,39 @@ const { getTypeLabel, getGenderLabel } = usePetHelper()
       <view class="min-w-0 flex-1">
         <view class="flex items-center justify-between">
           <view class="flex items-center gap-2">
-            <text class="truncate text-lg text-gray-800 font-black">
+            <text class="truncate text-base text-gray-800 font-bold">
               {{ pet.name }}
             </text>
             <view
-              class="h-5 flex items-center justify-center rounded-full px-2 text-[10px] font-bold"
-              :class="pet.type === 'cat' ? 'bg-blue-50 text-blue-600' : 'bg-amber-50 text-amber-600'"
+              class="flex items-center justify-center rounded-lg px-1.5 py-0.5 text-[10px] font-medium"
+              :class="pet.type === 'cat' ? 'bg-blue-50 text-blue-600' : 'bg-orange-50 text-orange-600'"
             >
               {{ getTypeLabel(pet.type) }}
             </view>
           </view>
 
           <!-- Actions Icons -->
-          <view class="flex items-center gap-3">
+          <view class="flex items-center gap-2">
             <view
-              class="h-8 w-8 flex items-center justify-center rounded-full bg-gray-50 text-gray-500 transition-all active:scale-95 active:bg-gray-100"
+              class="h-7 w-7 flex items-center justify-center rounded-full text-gray-400 transition-all active:bg-gray-100 active:text-gray-600"
               @click.stop="emit('edit', pet.id)"
             >
-              <view class="i-carbon-edit text-base" />
+              <view class="i-carbon-edit text-xs" />
             </view>
             <view
-              class="h-8 w-8 flex items-center justify-center rounded-full bg-red-50 text-red-500 transition-all active:scale-95 active:bg-red-100"
+              class="h-7 w-7 flex items-center justify-center rounded-full text-gray-400 transition-all active:bg-red-50 active:text-red-500"
               @click.stop="emit('delete', pet.id)"
             >
-              <view class="i-carbon-trash-can text-base" />
+              <view class="i-carbon-trash-can text-xs text-error" />
             </view>
           </view>
         </view>
 
-        <view class="mt-1 truncate text-xs text-gray-500">
+        <view class="mt-0.5 truncate text-xs text-gray-500">
           {{ pet.breed || '未知品种' }}
         </view>
 
-        <view class="mt-2 flex flex-wrap gap-1.5">
+        <view class="mt-2 flex flex-wrap gap-2">
           <view v-if="pet.age" class="tag">
             {{ pet.age }}
           </view>
@@ -87,9 +87,9 @@ const { getTypeLabel, getGenderLabel } = usePetHelper()
 
 <style scoped>
 .shadow-sm {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 .tag {
-  @apply rounded-full bg-gray-50 px-2 py-0.5 text-[10px] text-gray-500 font-medium;
+  @apply rounded-lg bg-gray-50 px-2 py-0.5 text-[10px] text-gray-500 font-medium border border-gray-100;
 }
 </style>

@@ -14,6 +14,7 @@ page {
   // --- 基础色板 (Base Palette) ---
   // 品牌色 - 活力橙
   --color-primary: #ff7a00;
+  --color-primary-light: #fff0e5; // 浅橙背景
 
   // 功能色 - 遵循 uni-app 标准但使用 CSS 变量
   --color-success: #4cd964;
@@ -22,26 +23,28 @@ page {
   --color-info: #909399;
 
   // --- 文字颜色 (Typography) ---
-  --text-primary: #333333; // 主要文字
-  --text-secondary: #666666; // 次要文字/说明文字
-  --text-tertiary: #999999; // 辅助文字
-  --text-placeholder: #808080; // 占位符
-  --text-disabled: #c0c0c0; // 禁用状态
+  --text-primary: #1f2937; // 主要文字 (Gray-800)
+  --text-secondary: #6b7280; // 次要文字/说明文字 (Gray-500)
+  --text-tertiary: #9ca3af; // 辅助文字 (Gray-400)
+  --text-placeholder: #d1d5db; // 占位符 (Gray-300)
+  --text-disabled: #e5e7eb; // 禁用状态 (Gray-200)
   --text-inverse: #ffffff; // 反色文字
 
   // --- 背景颜色 (Backgrounds) ---
-  --bg-page: #f7f8fa; // 页面背景 (浅灰)
+  --bg-page: #fdfbf7; // 页面背景 (暖米白)
   --bg-card: #ffffff; // 卡片/内容背景 (纯白)
-  --bg-hover: #f1f1f1; // 点击态
+  --bg-hover: #f3f4f6; // 点击态 (Gray-100)
   --bg-mask: rgba(0, 0, 0, 0.4); // 遮罩
 
   // --- 边框与分割线 (Borders) ---
-  --border-color: #eeeeee; // 常规边框
-  --border-light: #f5f5f5; // 浅色分割线
-  --border-dark: #c8c7cc; // 深色边框
+  --border-color: #e5e7eb; // 常规边框 (Gray-200)
+  --border-light: #f3f4f6; // 浅色分割线 (Gray-100)
+  --border-dark: #d1d5db; // 深色边框 (Gray-300)
 
   // --- 阴影 (Shadows) ---
-  --shadow-sm: rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-DEFAULT: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   // --- 装饰性颜色 (Decorative) ---
   // 用于 BackgroundGlow 组件
@@ -57,7 +60,7 @@ page {
   --wot-color-theme: var(--color-primary);
   --wot-color-title: var(--text-primary);
   --wot-color-content: var(--text-secondary);
-  --wot-color-secondary: var(--color-text-primary); // 暂定映射为主色，如需区分可单独定义
+  --wot-color-secondary: var(--color-primary); // 暂定映射为主色，如需区分可单独定义
   --wot-color-warning: var(--color-warning);
   --wot-color-success: var(--color-success);
   --wot-color-danger: var(--color-error);

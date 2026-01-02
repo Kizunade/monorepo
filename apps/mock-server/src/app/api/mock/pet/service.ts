@@ -2,9 +2,9 @@ import type { PetModel } from './model'
 
 export abstract class PetService {
   public static pets: PetModel.Pet[] = [
-    { id: 1, name: '可乐', type: 'cat', avatar: 'https://placecats.com/200/200', breed: '加菲猫', age: '2岁', gender: 'male' },
-    { id: 2, name: '团团', type: 'dog', avatar: 'https://placedog.net/200/200', breed: '金毛', age: '1岁', gender: 'female', weight: 15 },
-    { id: 3, name: '球球', type: 'cat', avatar: 'https://placecats.com/200/201', breed: '布偶猫', age: '3个月', gender: 'female' },
+    { id: 1, name: '可乐', type: 'cat', avatar: 'https://placecats.com/200/200', breed: '加菲猫', age: '2岁', gender: 'male', isOwner: true },
+    { id: 2, name: '团团', type: 'dog', avatar: 'https://placedog.net/200/200', breed: '金毛', age: '1岁', gender: 'female', weight: 15, isOwner: true },
+    { id: 3, name: '球球', type: 'cat', avatar: 'https://placecats.com/200/201', breed: '布偶猫', age: '3个月', gender: 'female', isOwner: false },
   ]
 
   static async getList(): Promise<PetModel.GetPetListResponse> {
