@@ -16,7 +16,13 @@ globs: apps/mock-server/**
 
 ## 2. 代码规范
 
-### 2.1 Model (`model.ts`)
+### 2.1 接口定义规范
+- **查询 (GET)**: 使用 Query Params（`?key=value`）。
+- **删除 (DELETE)**: 使用 Query Params。
+- **新增 (POST)**: 使用 Request Body (JSON)。
+- **更新 (PUT)**: 使用 Request Body (JSON)。
+
+### 2.2 Model (`model.ts`)
 - 使用 `zod` 定义请求参数 (`Params`) 和响应数据 (`Response`)。
 - 使用 `export namespace [ModuleName]Model` 组织导出的 Schema 和 Type。
 - 为每个字段添加 `.describe()` 以生成详细文档。

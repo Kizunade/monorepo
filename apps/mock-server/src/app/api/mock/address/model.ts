@@ -37,7 +37,7 @@ export namespace AddressModel {
 
   // 删除参数
   export const removeParams = z.object({
-    addrId: z.string().describe('地址ID'),
+    addrId: z.number().describe('地址ID'),
   })
 
   // 分页响应结果
@@ -48,7 +48,7 @@ export namespace AddressModel {
     pageSize: z.number().describe('每页大小'),
     total: z.number().describe('总记录数'),
     pages: z.number().describe('总页数'),
-    list: z.array(address).describe('数据列表'),
+    data: z.array(address).describe('数据列表'),
   }).describe('分页响应结果')
 
   export type Address = z.infer<typeof address>

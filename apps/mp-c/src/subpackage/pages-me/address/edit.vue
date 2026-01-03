@@ -119,7 +119,9 @@ function handleDelete() {
     success: async (res) => {
       if (res.confirm) {
         try {
-          await deleteAddress(formData.value.addrId!)
+          await deleteAddress({
+            addrId: formData.value.addrId,
+          })
           uni.showToast({ title: '删除成功', icon: 'success' })
 
           await addressStore.refreshAddressList()

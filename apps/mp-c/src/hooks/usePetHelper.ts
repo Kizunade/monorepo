@@ -46,6 +46,28 @@ export function usePetHelper() {
       : 'https://placedog.net/200/200'
   }
 
+  function getPetAge(birthday: number | undefined | null) {
+    if (!birthday)
+      return '-'
+    const birth = new Date(birthday)
+    const now = new Date()
+    let years = now.getFullYear() - birth.getFullYear()
+    let months = now.getMonth() - birth.getMonth()
+    if (months < 0) {
+      years--
+      months += 12
+    }
+    if (years < 0)
+      return '0个月'
+    if (years === 0 && months === 0)
+      return '未满月'
+    if (years === 0)
+      return `${months}个月`
+    if (months === 0)
+      return `${years}岁`
+    return `${years}岁${months}个月`
+  }
+
   return {
     typeOptions,
     genderOptions,
@@ -54,5 +76,6 @@ export function usePetHelper() {
     getTypeLabel,
     getGenderLabel,
     getDefaultAvatar,
+    getPetAge,
   }
 }

@@ -26,7 +26,7 @@ export const useAddressStore = defineStore('address', () => {
         pageSize: pageSize.value,
       })
 
-      const list = res.list || []
+      const list = res.data || []
 
       if (isLoadMore) {
         addressList.value.push(...list)

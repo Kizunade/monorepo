@@ -32,6 +32,7 @@ export default uniHelper({
     'jsdoc/require-returns-description': 'off',
     'ts/no-empty-object-type': 'off',
     'no-extend-native': 'off',
+    'regexp/no-dupe-characters-character-class': 'off',
     'vue/singleline-html-element-content-newline': [
       'error',
       {

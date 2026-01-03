@@ -41,12 +41,12 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
     },
   )
   .delete(
-    '/:addrId',
-    ({ params }) => {
-      return AddressService.remove(params.addrId)
+    '',
+    ({ body }) => {
+      return AddressService.remove(body.addrId)
     },
     {
-      params: AddressModel.removeParams,
+      body: AddressModel.removeParams,
       response: AddressModel.ajaxResult,
       detail: {
         summary: '删除接口',

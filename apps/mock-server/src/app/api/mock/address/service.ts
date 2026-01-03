@@ -70,7 +70,7 @@ export abstract class AddressService {
     }
   }
 
-  static async remove(addrId: string): Promise<AddressModel.AjaxResult> {
+  static async remove(addrId: number): Promise<AddressModel.AjaxResult> {
     const initialLength = mockAddressList.length
     mockAddressList = mockAddressList.filter(a => a.addrId !== Number(addrId))
 
@@ -93,7 +93,7 @@ export abstract class AddressService {
     const totalPages = Math.ceil(total / pageSize)
     const start = (pageNum - 1) * pageSize
     const end = start + pageSize
-    const list = mockAddressList.slice(start, end)
+    const data = mockAddressList.slice(start, end)
 
     return {
       code: 200,
@@ -102,7 +102,7 @@ export abstract class AddressService {
       pageSize,
       total,
       pages: totalPages,
-      list,
+      data,
     }
   }
 }

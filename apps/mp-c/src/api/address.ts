@@ -21,8 +21,8 @@ export function updateAddress(data: AddressModel.Address) {
  * 删除地址
  * @param addrId 地址ID
  */
-export function deleteAddress(addrId: number | string) {
-  return http.Delete<void>(`/address/${addrId}`)
+export function deleteAddress(data: AddressModel.RemoveParams) {
+  return http.Delete<void>('/address', data)
 }
 
 /**

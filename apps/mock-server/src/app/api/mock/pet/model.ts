@@ -9,7 +9,7 @@ export namespace PetModel {
     type: z.enum(['cat', 'dog']).describe('宠物类型'),
     avatar: z.string().describe('宠物头像'),
     breed: z.string().optional().describe('宠物品种'),
-    age: z.string().optional().describe('宠物年龄'),
+    birthday: z.number().optional().describe('生日(时间戳)'),
     gender: z.enum(['male', 'female']).optional().describe('宠物性别'),
     weight: z.number().optional().describe('体重(kg)'),
     sterilized: z.boolean().optional().describe('是否绝育'),

@@ -25,7 +25,7 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
     },
   )
   .post(
-    '/add',
+    '',
     ({ body }) => {
       return PetService.add(body as PetModel.AddPetParams)
     },
@@ -39,8 +39,8 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
       },
     },
   )
-  .post(
-    '/update',
+  .put(
+    '',
     ({ body }) => {
       return PetService.update(body as PetModel.UpdatePetParams)
     },
@@ -54,10 +54,10 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
       },
     },
   )
-  .post(
-    '/delete',
+  .delete(
+    '',
     ({ body }) => {
-      return PetService.delete(body as PetModel.DeletePetParams)
+      return PetService.delete(body)
     },
     {
       body: PetModel.deletePetParams,
@@ -70,7 +70,7 @@ const app = new Elysia({ prefix: getPrefix(TOOL_NAME) })
     },
   )
   .get(
-    '/detail',
+    '',
     ({ query }) => {
       return PetService.findById(query as unknown as PetModel.FindByIdParams)
     },

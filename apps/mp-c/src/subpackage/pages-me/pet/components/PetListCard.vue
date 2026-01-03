@@ -12,7 +12,7 @@ const emit = defineEmits<{
   (e: 'delete', id: number): void
 }>()
 
-const { getTypeLabel, getGenderLabel } = usePetHelper()
+const { getTypeLabel, getGenderLabel, getPetAge } = usePetHelper()
 </script>
 
 <template>
@@ -67,8 +67,8 @@ const { getTypeLabel, getGenderLabel } = usePetHelper()
         </view>
 
         <view class="mt-2 flex flex-wrap gap-2">
-          <view v-if="pet.age" class="tag">
-            {{ pet.age }}
+          <view v-if="pet.birthday" class="tag">
+            {{ getPetAge(pet.birthday) }}
           </view>
           <view class="tag">
             {{ getGenderLabel(pet.gender) }}

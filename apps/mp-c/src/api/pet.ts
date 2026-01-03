@@ -6,17 +6,19 @@ export function getPetList() {
 }
 
 export function addPet(data: PetModel.AddPetParams) {
-  return http.Post<PetModel.AddPetResponse>('/pet/add', data)
+  return http.Post<PetModel.AddPetResponse>('/pet', data)
 }
 
 export function updatePet(data: PetModel.UpdatePetParams) {
-  return http.Post<PetModel.UpdatePetResponse>('/pet/update', data)
+  return http.Put<PetModel.UpdatePetResponse>('/pet', data)
 }
 
 export function deletePet(data: PetModel.DeletePetParams) {
-  return http.Post<PetModel.DeletePetResponse>('/pet/delete', data)
+  return http.Delete<PetModel.DeletePetResponse>('/pet', data)
 }
 
 export function getPetDetail(data: PetModel.FindByIdParams) {
-  return http.Get<PetModel.FindByIdResponse>('/pet/detail', { params: data })
+  return http.Get<PetModel.FindByIdResponse>('/pet', {
+    params: data,
+  })
 }

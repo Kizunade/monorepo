@@ -19,7 +19,7 @@ definePage({
 })
 
 const petStore = usePetStore()
-const { getTypeLabel } = usePetHelper()
+const { getTypeLabel, getPetAge } = usePetHelper()
 const petId = ref<number | null>(null)
 const pet = ref<PetModel.Pet | null>(null)
 const loading = ref(false)
@@ -30,7 +30,7 @@ const currentTab = ref(0)
 const systemInfo = uni.getSystemInfoSync()
 const offsetTop = (systemInfo.statusBarHeight || 0) + 44
 
-const petAge = computed(() => pet.value?.age || '-')
+const petAge = computed(() => getPetAge(pet.value?.birthday))
 const petWeight = computed(() => pet.value?.weight != null ? `${pet.value.weight}` : '-')
 
 async function load() {
@@ -71,7 +71,7 @@ function handleDelete() {
     success: async (res) => {
       if (!res.confirm)
         return
-      const ok = await petStore.remove(petId.value!)
+      const ok = await petStore.remove(petId.value)
       if (ok) {
         uni.showToast({ title: '已移除', icon: 'success' })
         setTimeout(() => uni.navigateBack(), 800)

@@ -8,6 +8,7 @@ import VueHook from 'alova/vue'
 import { useGlobalConfigStore } from '@/store/globalConfig'
 import { toLoginPage } from '@/utils/toLoginPage'
 import { mockList as localMockList } from './mockList'
+import { isMatchMock } from './tools/checkMock'
 import { ContentTypeEnum, ResultEnum, ShowMessage } from './tools/enum'
 
 // 配置动态Tag
@@ -92,10 +93,13 @@ const alovaInstance = createAlova({
     const globalConfigStore = useGlobalConfigStore()
     const globalMockList = globalConfigStore.config?.mockList || []
 
-    if (isDevMode && localMockList.includes(url)) {
+    const isMock = isMatchMock(url, method.type, globalMockList)
+    const isLocalMock = isMatchMock(url, method.type, localMockList)
+
+    if (isDevMode && isLocalMock) {
       method.baseURL = API_DOMAINS.LOCAL
     }
-    else if (globalMockList.includes(url)) {
+    else if (isMock) {
       method.baseURL = API_DOMAINS.DEV
     }
 

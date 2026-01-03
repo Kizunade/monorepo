@@ -6,6 +6,7 @@ import { computed, ref } from 'vue'
 import WdButton from 'wot-design-uni/components/wd-button/wd-button.vue'
 import WdCellGroup from 'wot-design-uni/components/wd-cell-group/wd-cell-group.vue'
 import WdCell from 'wot-design-uni/components/wd-cell/wd-cell.vue'
+import WdDatetimePicker from 'wot-design-uni/components/wd-datetime-picker/wd-datetime-picker.vue'
 import WdForm from 'wot-design-uni/components/wd-form/wd-form.vue'
 import WdInput from 'wot-design-uni/components/wd-input/wd-input.vue'
 import WdPicker from 'wot-design-uni/components/wd-picker/wd-picker.vue'
@@ -33,7 +34,7 @@ const formData = ref<PetModel.AddPetParams & Partial<Pick<PetModel.Pet, 'id'>>>(
   type: 'cat',
   avatar: 'https://placecats.com/200/200',
   breed: '',
-  age: '',
+  birthday: undefined,
   gender: 'female',
   weight: undefined,
   sterilized: false,
@@ -207,7 +208,12 @@ onLoad(async (options) => {
                 :columns="breedColumns"
               />
 
-              <WdInput v-model="formData.age" label="年龄" placeholder="例如：2岁" clearable />
+              <WdDatetimePicker
+                v-model="formData.birthday"
+                label="生日"
+                type="date"
+                :min-date="new Date('2000-01-01').getTime()"
+              />
 
               <WdInput
                 v-model.number="formData.weight"
