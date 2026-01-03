@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { Suspense } from 'react'
 import { MockDashboard } from '@/components/mock-dashboard'
 
 async function getMockModules() {
@@ -20,5 +21,9 @@ async function getMockModules() {
 export default async function MockDocsPage() {
   const modules = await getMockModules()
 
-  return <MockDashboard modules={modules} />
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MockDashboard modules={modules} />
+    </Suspense>
+  )
 }
