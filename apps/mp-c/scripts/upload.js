@@ -30,7 +30,7 @@ async function sendWebhook(status, errorMessage = '') {
     const formData = new FormData()
     formData.append('status', status)
     formData.append('commit-message', desc)
-    formData.append('mission', '小程序构建发布')
+    formData.append('mission', '[ 宠物主 ] 小程序打包构建')
 
     if (errorMessage) {
       formData.append('error-message', errorMessage)

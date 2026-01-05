@@ -7,7 +7,7 @@
     "lint:fix": "bun run --filter '*' lint:fix",
     "dev": "bun run --filter '*' dev",
     "build": "bun run --filter '*' build",
-    "build:mp": "bun run --filter 'mp-c' build:mp",
+    "build:mp": "bun run --filter 'mp-*' build:mp",
     "build:mock-server": "bun run --filter 'mock-server' build"
   },
   "devDependencies": {

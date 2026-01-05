@@ -1,0 +1,37 @@
+name: Deploy MP-B
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/mp-b/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build MP-B
+        run: bun run --filter mp-b build:mp-weixin
+
+      - name: Upload MP-B
+        working-directory: apps/mp-b
+        env:
+          APP_ID: ${{ secrets.MP_B_APP_ID }}
+          MP_PRIVATE_KEY: ${{ secrets.MP_B_PRIVATE_KEY }}
+          CI_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: bun run scripts/upload.js

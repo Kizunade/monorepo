@@ -1,3 +1,3 @@
-export function getPrefix(name: string): string {
-  return `/api/mock/${name}`;
+export function getPrefix(name: string, type: 'sitter' | 'owner'): string {
+  return `/api/mock/${type}/${name}`
 }

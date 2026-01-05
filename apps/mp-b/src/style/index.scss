@@ -1,0 +1,71 @@
+// 测试用的 iconfont，可生效
+// @import './iconfont.css';
+
+.test {
+  // 可以通过 @apply 多个样式封装整体样式
+  @apply mt-4 ml-4;
+
+  padding-top: 4px;
+  color: red;
+}
+
+:root,
+page {
+  // --- 基础色板 (Base Palette) ---
+  // 品牌色 - 活力橙
+  --color-primary: #ff7a00;
+  --color-primary-light: #fff0e5; // 浅橙背景
+
+  // 功能色 - 遵循 uni-app 标准但使用 CSS 变量
+  --color-success: #4cd964;
+  --color-warning: #f0ad4e;
+  --color-error: #dd524d;
+  --color-info: #909399;
+
+  // --- 文字颜色 (Typography) ---
+  --text-primary: #1f2937; // 主要文字 (Gray-800)
+  --text-secondary: #6b7280; // 次要文字/说明文字 (Gray-500)
+  --text-tertiary: #9ca3af; // 辅助文字 (Gray-400)
+  --text-placeholder: #d1d5db; // 占位符 (Gray-300)
+  --text-disabled: #e5e7eb; // 禁用状态 (Gray-200)
+  --text-inverse: #ffffff; // 反色文字
+
+  // --- 背景颜色 (Backgrounds) ---
+  --bg-page: #fdfbf7; // 页面背景 (暖米白)
+  --bg-card: #ffffff; // 卡片/内容背景 (纯白)
+  --bg-hover: #f3f4f6; // 点击态 (Gray-100)
+  --bg-mask: rgba(0, 0, 0, 0.4); // 遮罩
+
+  // --- 边框与分割线 (Borders) ---
+  --border-color: #e5e7eb; // 常规边框 (Gray-200)
+  --border-light: #f3f4f6; // 浅色分割线 (Gray-100)
+  --border-dark: #d1d5db; // 深色边框 (Gray-300)
+
+  // --- 阴影 (Shadows) ---
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-DEFAULT: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  // --- 装饰性颜色 (Decorative) ---
+  // 用于 BackgroundGlow 组件
+  --glow-color-1: rgba(255, 138, 76, 0.45);
+  --glow-color-2: rgba(255, 99, 132, 0.45);
+  --glow-color-3: rgba(255, 205, 86, 0.45);
+  --glow-color-4: rgba(255, 159, 64, 0.45);
+  --overlay-start: rgba(255, 255, 255, 0.6);
+  --overlay-end: rgba(255, 255, 255, 0.8);
+
+  // --- 兼容性映射 ---
+  // 映射到 Wot Design Uni 变量
+  --wot-color-theme: var(--color-primary);
+  --wot-color-title: var(--text-primary);
+  --wot-color-content: var(--text-secondary);
+  --wot-color-secondary: var(--color-primary); // 暂定映射为主色，如需区分可单独定义
+  --wot-color-warning: var(--color-warning);
+  --wot-color-success: var(--color-success);
+  --wot-color-danger: var(--color-error);
+  --wot-color-info: var(--color-info);
+  --wot-color-disabled: var(--text-disabled);
+  --wot-color-border: var(--border-color);
+  --wot-bg-color: var(--bg-page);
+}
