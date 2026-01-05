@@ -11,7 +11,8 @@
     "build:mock-server": "bun run --filter 'mock-server' build"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "ci": "workspace:*"
   },
   "peerDependencies": {
     "typescript": "^5"

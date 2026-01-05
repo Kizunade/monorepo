@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // Configuration
-const APP_ID = process.env.APP_ID || 'wxa32e349ec0144dd5'
+const APP_ID = process.env.APP_ID || 'wxc67898cddb56cbbf'
 // The build output directory for production
 const projectPath = path.resolve(__dirname, '../dist/build/mp-weixin')
 const privateKeyPath = path.resolve(__dirname, `../private.${APP_ID}.key`)

@@ -1,0 +1,1 @@
+export { membersWechat } from './memberManage/membersWechat'
