@@ -27,6 +27,9 @@ export namespace BotCiCdModel {
     'mission': t.Optional(t.String({
       description: '任务名称',
     })),
+    'appid': t.Optional(t.String({
+      description: '小程序 AppID',
+    })),
     'log-url': t.Optional(t.String({
       description: '日志 URL',
     })),

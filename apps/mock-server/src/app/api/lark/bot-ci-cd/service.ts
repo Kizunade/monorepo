@@ -1,5 +1,6 @@
 import { Buffer } from 'node:buffer'
 import * as lark from '@larksuiteoapi/node-sdk'
+import QRCode from 'qrcode'
 import { z } from 'zod'
 import { BotCiCdModel } from './model'
 
@@ -31,40 +32,53 @@ export abstract class BotCiCdService {
   static async handleWebhook(params: BotCiCdModel.WebhookParams): Promise<BotCiCdModel.AjaxResult> {
     try {
       const client = this.getClient()
-      const { status, 'commit-message': commitMessage, 'error-message': errorMessage, qrcode, mission, 'log-url': logUrl } = params
+      const { status, 'commit-message': commitMessage, 'error-message': errorMessage, qrcode, mission, 'log-url': logUrl, appid } = params
 
       let imageKey = ''
+
+      const uploadImage = async (buffer: Buffer) => {
+        const tenantAccessToken = await (client as any).tokenManager.getTenantAccessToken()
+        const formData = new FormData()
+        // @ts-expect-error buffer type mismatch
+        formData.append('image', new Blob([buffer]))
+        formData.append('image_type', 'message')
+
+        const res = await fetch('https://open.larksuite.com/open-apis/im/v1/images', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${tenantAccessToken}`,
+          },
+        })
+
+        const resData = await res.json()
+
+        const parsed = z.object({
+          data: z.object({
+            image_key: z.string(),
+          }),
+        }).parse(resData)
+        return parsed.data.image_key
+      }
 
       // Upload QR Code if present
       if (qrcode) {
         try {
           const fileBuffer = Buffer.from(await qrcode.arrayBuffer())
-
-          const tenantAccessToken = await (client as any).tokenManager.getTenantAccessToken()
-          const formData = new FormData()
-          formData.append('image', new Blob([fileBuffer]))
-          formData.append('image_type', 'message')
-
-          const res = await fetch('https://open.larksuite.com/open-apis/im/v1/images', {
-            method: 'POST',
-            body: formData,
-            headers: {
-              Authorization: `Bearer ${tenantAccessToken}`,
-            },
-          })
-
-          const resData = await res.json()
-
-          const parsed = z.object({
-            data: z.object({
-              image_key: z.string(),
-            }),
-          }).parse(resData)
-
-          imageKey = parsed.data.image_key
+          imageKey = await uploadImage(fileBuffer)
         }
         catch (error) {
           console.error('Error processing image:', error)
+        }
+      }
+      else if (appid) {
+        try {
+          const url = `https://open.weixin.qq.com/sns/getexpappinfo?appid=${appid}&path=pages%2Findex%2Findex.html#wechat-redirect`
+          const buffer = await QRCode.toBuffer(url)
+          imageKey = await uploadImage(buffer)
+        }
+        catch (error) {
+          console.error('Error generating/uploading QR code:', error)
         }
       }
 

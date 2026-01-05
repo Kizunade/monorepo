@@ -31,6 +31,7 @@ async function sendWebhook(status, errorMessage = '') {
     formData.append('status', status)
     formData.append('commit-message', desc)
     formData.append('mission', '[ 宠物主 ] 小程序打包构建')
+    formData.append('appid', APP_ID)
 
     if (errorMessage) {
       formData.append('error-message', errorMessage)
