@@ -15,6 +15,24 @@ export namespace MpModel {
     token: z.string().describe('登录凭证'),
   }).describe('小程序登录响应')
 
+  export const sitterInfo = z.object({
+    level: z.string().describe('等级'),
+    verified: z.boolean().describe('是否实名认证'),
+    serviceYears: z.number().describe('服务年限'),
+  }).describe('宠托师信息')
+
+  export const userStats = z.object({
+    rating: z.number().describe('评分'),
+    orderCount: z.number().describe('订单数'),
+    fans: z.number().describe('粉丝数'),
+  }).describe('用户统计数据')
+
+  export const userWallet = z.object({
+    balance: z.number().describe('余额'),
+    frozen: z.number().describe('冻结金额'),
+    incomeMonth: z.number().describe('本月收入'),
+  }).describe('用户钱包数据')
+
   export const userInfo = z.object({
     userId: z.number().describe('用户ID'),
     username: z.string().describe('用户名'),
@@ -23,6 +41,9 @@ export namespace MpModel {
     phone: z.string().describe('手机号'),
     gender: z.enum(['男', '女', '保密']).describe('性别'),
     birthday: z.string().describe('生日(YYYY-MM-DD)'),
+    sitterInfo: sitterInfo.optional().describe('宠托师信息'),
+    stats: userStats.optional().describe('统计数据'),
+    wallet: userWallet.optional().describe('钱包数据'),
   }).describe('用户信息')
 
   export const getUserInfoResponse = z.object({

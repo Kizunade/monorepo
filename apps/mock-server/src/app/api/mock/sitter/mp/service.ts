@@ -26,6 +26,21 @@ export abstract class MpService {
     phone: '13800138000',
     gender: '保密',
     birthday: '2000-01-01',
+    sitterInfo: {
+      level: '高级宠托师',
+      verified: true,
+      serviceYears: 2,
+    },
+    stats: {
+      rating: 4.9,
+      orderCount: 128,
+      fans: 356,
+    },
+    wallet: {
+      balance: 1250.00,
+      frozen: 200.00,
+      incomeMonth: 3500.00,
+    },
   }
 
   static async getUserInfo(): Promise<MpModel.GetUserInfoResponse> {

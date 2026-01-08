@@ -160,7 +160,7 @@ onShow(() => {
       :show-scrollbar="false"
       @scroll="handleScroll"
     >
-      <view class="px-5 pb-36 pt-28">
+      <view class="px-5 pb-36">
         <!-- Loading Skeleton -->
         <view v-if="!pet && loading" class="mt-10 animate-pulse space-y-6">
           <view class="mx-auto h-32 w-32 rounded-full bg-gray-200/50" />
