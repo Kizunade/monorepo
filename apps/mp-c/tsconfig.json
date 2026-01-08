@@ -17,7 +17,7 @@
         "./src/static/*"
       ],
       "@mock/*": [
-        "../mock-server/src/app/api/mock/*"
+        "../mock-server/src/app/api/mock/owner/*"
       ]
     },
     "resolveJsonModule": true,

@@ -7,12 +7,13 @@ alwaysApply: true
 本项目是一个 **C2C/B2C 宠物上门服务平台**，旨在连接宠物主与专业的宠托师/洗护师。
 - **核心业务**：上门洗护、上门喂猫、遛狗服务。
 - **主要流程**：用户（C端）通过小程序 -> 按时间/位置搜索服务人员 -> 查看详情 -> 下单预约 -> 服务履约。
-- **当前目标**：构建高质量、用户体验流畅的 C 端小程序，并建立稳健的前后端交互标准。
+- **当前目标**：构建高质量、用户体验流畅的小程序，并建立稳健的前后端交互标准。
 
 ## 2. Monorepo 架构上下文
 当前 Monorepo 包含以下核心应用：
 1.  **`apps/mp-c`**: C 端用户小程序 (UniApp + Vue3 + TS)。具体规范请参考：[mp_rules.md](mdc:.trae/rules/mp_rules.md)
-2.  **`apps/mock-server`**: Mock API 服务端 (Elysia + Node)。具体规范请参考：[mock_rules.md](mdc:.trae/rules/mock_rules.md)
+2.  **`apps/mp-b`**: B 端服务人员小程序 (UniApp + Vue3 + TS)。具体规范请参考：[mp_rules.md](mdc:.trae/rules/mp_rules.md)
+3.  **`apps/mock-server`**: Mock API 服务端 (Elysia + Node)。具体规范请参考：[mock_rules.md](mdc:.trae/rules/mock_rules.md)
 
 ## 3. 标准开发流程 (Standard Operating Procedure)
 
@@ -57,4 +58,3 @@ alwaysApply: true
 - **主动拆解**：遇到模糊需求，先按上述流程拆解 Plan，征求用户同意后再执行。
 - **类型安全**：始终坚持 TypeScript 严格模式，前后端数据结构必须对齐。
 - **原子化优先**：编写 CSS 时，优先思考“是否有对应的 UnoCSS 类名”，避免手写 raw CSS。
-- **文件路径**：操作文件时，始终注意当前是在 `apps/mp-c` 还是 `apps/mock-server` 目录下。

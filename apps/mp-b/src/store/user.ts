@@ -5,7 +5,6 @@ import {
   getUserInfo,
 } from '@/api/login'
 import { pick } from '@/utils/pick'
-import { usePetStore } from './pet'
 
 const storedKeys = ['userId', 'username', 'nickname', 'avatar', 'phone', 'gender', 'birthday'] as const
 type TStoredKeys = typeof storedKeys[number]
@@ -54,11 +53,6 @@ export const useUserStore = defineStore(
       const res = await getUserInfo()
       if (res.code === 200 && res.data) {
         setUserInfo(res.data)
-        // Sync pets to petStore
-        if (res.data.pets) {
-          const petStore = usePetStore()
-          petStore.setPets(res.data.pets)
-        }
         return res.data
       }
       return null

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { getCurrentInstance, onMounted, onUnmounted, ref } from 'vue'
 import MeHeader from './components/MeHeader.vue'
-import MePetList from './components/MePetList.vue'
 import MeServices from './components/MeServices.vue'
 import MeTools from './components/MeTools.vue'
 
@@ -72,9 +71,6 @@ onUnmounted(() => {
       <!-- 设置相对定位和背景色，向上滚动时覆盖头部 -->
       <!-- 负 margin 制造一点重叠效果，让圆角衔接更自然 -->
       <view class="relative z-10 overflow-hidden rounded-t-[32rpx] bg-page shadow-[0_-10px_40px_rgba(0,0,0,0.02)] -mt-4">
-        <!-- 宠物家庭 -->
-        <MePetList />
-
         <!-- 功能矩阵 -->
         <MeTools />
 

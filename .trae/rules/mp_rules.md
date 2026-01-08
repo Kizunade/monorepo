@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-globs: apps/mp-c/**
+globs: apps/mp-c/**,apps/mp-b/**
 ---
 # 项目概览
 

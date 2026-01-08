@@ -18,6 +18,5 @@ export default store
 // 模块统一导出
 export * from './address'
 export * from './globalConfig'
-export * from './pet'
 export * from './token'
 export * from './user'
