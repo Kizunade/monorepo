@@ -1,5 +1,4 @@
 import type { MpModel } from './model'
-import { PetService } from '../pet/service'
 
 export abstract class MpService {
   static async login(args: MpModel.LoginParams): Promise<MpModel.LoginResponse> {
@@ -27,17 +26,14 @@ export abstract class MpService {
     phone: '13800138000',
     gender: '保密',
     birthday: '2000-01-01',
-    pets: PetService.pets,
   }
 
   static async getUserInfo(): Promise<MpModel.GetUserInfoResponse> {
-    const pets = await PetService.getList()
     return {
       code: 200,
       msg: 'success',
       data: {
         ...this.mockUser,
-        pets: pets.data,
       },
     }
   }
