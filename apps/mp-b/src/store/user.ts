@@ -6,7 +6,7 @@ import {
 } from '@/api/login'
 import { pick } from '@/utils/pick'
 
-const storedKeys = ['userId', 'username', 'nickname', 'avatar', 'phone', 'gender', 'birthday'] as const
+const storedKeys = ['userId', 'username', 'nickname', 'avatar', 'phone', 'gender', 'birthday', 'intro'] as const
 type TStoredKeys = typeof storedKeys[number]
 type TUserInfoWithoutPets = Pick<IUserInfoRes, TStoredKeys>
 
@@ -19,6 +19,7 @@ const userInfoState: TUserInfoWithoutPets = {
   phone: '',
   gender: '保密',
   birthday: '',
+  intro: '',
 }
 
 export const useUserStore = defineStore(
@@ -29,16 +30,19 @@ export const useUserStore = defineStore(
     // 设置用户信息
     const setUserInfo = (val: TUserInfoWithoutPets) => {
       console.log('设置用户信息', val)
-      // 若头像为空 则使用默认头像
-      if (!val.avatar) {
-        val.avatar = userInfoState.avatar
+      const next = { ...val }
+      if (!next.avatar) {
+        next.avatar = userInfoState.avatar
       }
-      userInfo.value = pick(val, [...storedKeys])
+      userInfo.value = pick(next, [...storedKeys])
     }
     const setUserAvatar = (avatar: string) => {
       userInfo.value.avatar = avatar
       console.log('设置用户头像', avatar)
       console.log('userInfo', userInfo.value)
+    }
+    const setUserIntro = (intro: string) => {
+      userInfo.value.intro = intro
     }
     // 删除用户信息
     const clearUserInfo = () => {
@@ -72,6 +76,7 @@ export const useUserStore = defineStore(
       fetchUserInfo,
       setUserInfo,
       setUserAvatar,
+      setUserIntro,
       ensureUserInfo,
     }
   },

@@ -35,6 +35,7 @@ const wallet = computed(() => detail.value?.wallet)
 
 const displayName = computed(() => detail.value?.nickname || userInfo.value.nickname || '未命名')
 const displayAvatar = computed(() => detail.value?.avatar || userInfo.value.avatar || '/static/images/default-avatar.png')
+const displayIntro = computed(() => detail.value?.intro || userInfo.value.intro || '')
 
 function maskPhone(phone?: string) {
   if (!phone)
@@ -167,6 +168,18 @@ onShow(() => {
 
               <view class="mt-2 text-xs text-gray-500 font-medium">
                 {{ maskPhone(detail?.phone || userInfo.phone) }}
+              </view>
+
+              <view
+                class="mt-1 max-w-full flex items-center gap-2"
+              >
+                <view class="i-carbon-quotes text-[14px] text-gray-400" />
+                <text
+                  class="max-w-full truncate text-[12px] font-semibold"
+                  :class="displayIntro ? 'text-gray-700' : 'text-gray-400'"
+                >
+                  {{ displayIntro || '添加一句你的服务风格（可提升信任与转化）' }}
+                </text>
               </view>
             </view>
 

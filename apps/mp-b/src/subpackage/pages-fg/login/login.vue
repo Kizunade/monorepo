@@ -32,8 +32,12 @@ async function handleLogin() {
     uni.requirePrivacyAuthorize({
       success: async () => {
         try {
-          await tokenStore.wxLogin()
+          const res = await tokenStore.wxLogin()
           tokenStore.loginSuccess()
+          if (res?.isFirstLogin) {
+            uni.navigateTo({ url: '/subpackage/pages-fg/onboarding/index' })
+            return
+          }
           uni.navigateBack()
         }
         catch (error) {
@@ -48,8 +52,12 @@ async function handleLogin() {
   else {
     // 非微信环境，执行模拟登录 (保留原有 login.vue 的逻辑)
     try {
-      await tokenStore.wxLogin()
+      const res = await tokenStore.wxLogin()
       tokenStore.loginSuccess()
+      if (res?.isFirstLogin) {
+        uni.navigateTo({ url: '/subpackage/pages-fg/onboarding/index' })
+        return
+      }
       uni.navigateBack()
     }
     catch (error) {

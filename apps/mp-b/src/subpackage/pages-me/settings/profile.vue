@@ -7,6 +7,7 @@ import WdCellGroup from 'wot-design-uni/components/wd-cell-group/wd-cell-group.v
 import WdDatetimePicker from 'wot-design-uni/components/wd-datetime-picker/wd-datetime-picker.vue'
 import WdInput from 'wot-design-uni/components/wd-input/wd-input.vue'
 import WdPicker from 'wot-design-uni/components/wd-picker/wd-picker.vue'
+import WdTextarea from 'wot-design-uni/components/wd-textarea/wd-textarea.vue'
 import WdToast from 'wot-design-uni/components/wd-toast/wd-toast.vue'
 import { updateUserInfo, uploadAvatar } from '@/api/login'
 import { useUserStore } from '@/store/user'
@@ -27,6 +28,7 @@ const formData = reactive({
   gender: userInfo.value.gender || '保密',
   birthday: userInfo.value.birthday || '',
   phone: userInfo.value.phone || '',
+  intro: userInfo.value.intro || '',
 })
 
 const genderColumns = ref(['男', '女', '保密'])
@@ -99,6 +101,12 @@ async function handleSubmit() {
     return
   }
 
+  const introText = (formData.intro || '').trim()
+  if (introText && (introText.length < 20 || introText.length > 200)) {
+    toast.warning('简介建议 20-200 字，更利于用户信任')
+    return
+  }
+
   try {
     uni.showLoading({ title: '保存中...' })
     const res = await updateUserInfo({
@@ -106,6 +114,7 @@ async function handleSubmit() {
       nickname: formData.nickname,
       gender: formData.gender as any,
       birthday: formData.birthday,
+      intro: introText || undefined,
     })
 
     if (res.code === 200) {
@@ -175,7 +184,27 @@ async function handleSubmit() {
         :default-value="Date.now()"
         @confirm="handleBirthdayConfirm"
       />
+
+      <wd-textarea
+        v-model="formData.intro"
+        label="个人简介"
+        align-right
+        placeholder="建议包含：擅长什么 + 你怎么做 + 你会记录什么（20-200字）"
+        placeholder-style="color: rgba(17, 24, 39, 0.38); font-size: 14px;"
+        :maxlength="200"
+        show-word-limit
+        clearable
+        auto-height
+      />
     </wd-cell-group>
+
+    <view class="mt-2 px-4">
+      <view class="flex items-center justify-between text-[11px] font-medium">
+        <view :class="(formData.intro || '').trim().length && (formData.intro || '').trim().length < 20 ? 'text-rose-600' : 'text-wot-content'">
+          {{ (formData.intro || '').trim().length && (formData.intro || '').trim().length < 20 ? `还差 ${20 - (formData.intro || '').trim().length} 字更可信` : '写清楚过程记录，会更容易接到好单' }}
+        </view>
+      </view>
+    </view>
 
     <view class="mt-8 px-4">
       <wd-button block @click="handleSubmit">

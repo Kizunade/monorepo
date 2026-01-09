@@ -1,6 +1,8 @@
 import type { MpModel } from './model'
 
 export abstract class MpService {
+  private static loginSeenCodes = new Set<string>()
+
   static async login(args: MpModel.LoginParams): Promise<MpModel.LoginResponse> {
     // 模拟登录逻辑
     if (args.code === 'fail') {
@@ -8,12 +10,17 @@ export abstract class MpService {
         code: 500,
         msg: '登录失败',
         token: '',
+        isFirstLogin: false,
       }
     }
+
+    const isFirstLogin = !this.loginSeenCodes.has(args.code)
+    this.loginSeenCodes.add(args.code)
     return {
       code: 200,
       msg: '登录成功',
       token: 'asdfw123kj',
+      isFirstLogin,
     }
   }
 
@@ -26,6 +33,7 @@ export abstract class MpService {
     phone: '13800138000',
     gender: '保密',
     birthday: '2000-01-01',
+    intro: '擅长上门喂猫与遛狗，偏细致记录型：到达拍门牌、过程多图、结束回访。对胆小猫友好，耐心陪玩不强撸。',
     sitterInfo: {
       level: '高级宠托师',
       verified: true,

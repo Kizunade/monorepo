@@ -7,6 +7,7 @@ export const PAGES = {
   LOGIN_PAGE: '/subpackage/pages-fg/login/login',
   REGISTER_PAGE: '/subpackage/pages-fg/login/register',
   NOT_FOUND_PAGE: '/subpackage/pages-fg/404/index',
+  ONBOARDING_PROFILE: '/subpackage/pages-fg/onboarding/index',
 
   ADDRESS_LIST: '/subpackage/pages-me/address/list',
   ADDRESS_EDIT: '/subpackage/pages-me/address/edit',
@@ -27,6 +28,7 @@ export const PAGE_NAMES: Record<keyof typeof PAGES, string> = {
   LOGIN_PAGE: '登录',
   REGISTER_PAGE: '注册',
   NOT_FOUND_PAGE: '404',
+  ONBOARDING_PROFILE: '完善资料',
 
   ADDRESS_LIST: '地址列表',
   ADDRESS_EDIT: '编辑地址',

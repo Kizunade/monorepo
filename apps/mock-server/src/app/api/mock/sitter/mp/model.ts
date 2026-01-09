@@ -13,6 +13,7 @@ export namespace MpModel {
     code: z.number().describe('状态码'),
     msg: z.string().describe('提示信息'),
     token: z.string().describe('登录凭证'),
+    isFirstLogin: z.boolean().describe('是否首次登录'),
   }).describe('小程序登录响应')
 
   export const sitterInfo = z.object({
@@ -41,6 +42,7 @@ export namespace MpModel {
     phone: z.string().describe('手机号'),
     gender: z.enum(['男', '女', '保密']).describe('性别'),
     birthday: z.string().describe('生日(YYYY-MM-DD)'),
+    intro: z.string().max(200).optional().describe('自我介绍'),
     sitterInfo: sitterInfo.optional().describe('宠托师信息'),
     stats: userStats.optional().describe('统计数据'),
     wallet: userWallet.optional().describe('钱包数据'),
@@ -57,6 +59,7 @@ export namespace MpModel {
     avatar: z.string().optional().describe('头像URL'),
     gender: z.enum(['男', '女', '保密']).optional().describe('性别'),
     birthday: z.string().optional().describe('生日'),
+    intro: z.string().max(200).optional().describe('自我介绍'),
   }).describe('更新用户信息参数')
 
   export const updateUserInfoResponse = z.object({

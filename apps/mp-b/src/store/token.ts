@@ -14,6 +14,7 @@ const tokenInfoState = {
   code: 0,
   msg: '',
   token: '',
+  isFirstLogin: false,
 }
 
 export const useTokenStore = defineStore(
@@ -97,6 +98,7 @@ export const useTokenStore = defineStore(
         else {
           const res = await _wxLogin({ code: 'demo' })
           await _postLogin(res)
+          return res
         }
       }
       catch (error) {
@@ -170,6 +172,10 @@ export const useTokenStore = defineStore(
       return hasLoginInfo.value && !isTokenExpired.value
     })
 
+    const isFirstLogin = computed(() => {
+      return Boolean(tokenInfo.value?.isFirstLogin)
+    })
+
     /**
      * 尝试获取有效的token，如果过期且可刷新，则刷新token
      * @returns 有效的token或空字符串
@@ -177,6 +183,14 @@ export const useTokenStore = defineStore(
     const tryGetValidToken = async (): Promise<string> => {
       updateNowTime()
       return getValidToken.value
+    }
+
+    const finishFirstLogin = () => {
+      updateNowTime()
+      tokenInfo.value = {
+        ...tokenInfo.value,
+        isFirstLogin: false,
+      }
     }
 
     // 登录弹窗控制
@@ -193,7 +207,17 @@ export const useTokenStore = defineStore(
         await wxLogin()
       }
       const userStore = useUserStore()
-      return await userStore.ensureUserInfo()
+
+      const info = await userStore.ensureUserInfo()
+      if (isFirstLogin.value) {
+        const pages = getCurrentPages()
+        const currentRoute = pages[pages.length - 1]?.route ? `/${pages[pages.length - 1].route}` : ''
+        const target = '/subpackage/pages-fg/onboarding/index'
+        if (currentRoute !== target) {
+          uni.navigateTo({ url: target })
+        }
+      }
+      return info
 
       // 未登录，跳转登录页
       // uni.navigateTo({ url: LOGIN_PAGE })
@@ -238,6 +262,8 @@ export const useTokenStore = defineStore(
       tokenInfo,
       setTokenInfo,
       updateNowTime,
+      isFirstLogin,
+      finishFirstLogin,
     }
   },
   {
